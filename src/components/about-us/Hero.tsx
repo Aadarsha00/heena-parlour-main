@@ -89,14 +89,14 @@ const Hero: React.FC<HeroProps> = ({
             <div className="space-y-6 text-gray-700 leading-relaxed">
               <p className="text-lg font-light">
                 Beautiful Eyebrow Threading & Henna began as a small family
-                business in 2010, founded by Priya Sharma, who brought her
+                business in 2010, founded by Ajita Karki, who brought her
                 expertise in traditional South Asian beauty techniques to
                 Baltimore.
               </p>
 
               <p className="text-lg font-light">
                 With a passion for threading and henna artistry passed down
-                through generations, Priya started with small kiosks offering
+                through generations, Ajita started with small kiosks offering
                 eyebrow threading services. Her precise technique and warm
                 personality quickly earned her a loyal clientele.
               </p>
@@ -118,7 +118,7 @@ const Hero: React.FC<HeroProps> = ({
                 </div>
                 <div>
                   <p className="font-medium text-gray-900 text-lg">
-                    Priya Sharma
+                   Ajita Karki
                   </p>
                   <p className="text-sm text-gray-600 font-light tracking-wide uppercase">
                     Founder & Lead Artist
