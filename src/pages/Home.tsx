@@ -11,6 +11,7 @@ import ServicesSection from "../components/Home/ServicesSection";
 import BlogSection from "../components/Home/Blog";
 
 import AppointmentPage from "../components/Home/Appointment-Booking";
+import AwardsSection from "../components/Home/Award-Section";
 
 export const Home: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ export const Home: React.FC = () => {
       <ServicesSection />
       <AppointmentPage />
       <OurWork />
+      <AwardsSection/>
       <ClientTestimonials />
       <BlogSection />
       <VisitParlor />
