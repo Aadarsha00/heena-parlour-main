@@ -1,3 +1,4 @@
+import AwardsSection from "../components/about-us/Award-Section";
 import Hero from "../components/about-us/Hero";
 import PhilosophySection from "../components/about-us/Philosophy";
 import WhatSetsUsApart from "../components/about-us/SetUs";
@@ -11,6 +12,7 @@ export const AboutUs: React.FC = () => {
       <Navbar />
       <Hero />
       <PhilosophySection />
+      <AwardsSection/>
       <WhatSetsUsApart />
       <VisitParlor />
       <Footer
