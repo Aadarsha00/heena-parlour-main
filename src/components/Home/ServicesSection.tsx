@@ -91,7 +91,7 @@ const normalizeApiResponse = (data: ApiResponse | undefined): ApiService[] => {
 // Helper function to format price
 const formatPrice = (price: string | number): string => {
   const priceStr = String(price);
-  return priceStr.startsWith("$") ? priceStr : `$${priceStr}`;
+  return priceStr.startsWith("$") ? priceStr : `${priceStr}`;
 };
 
 const ServicesSection = (): JSX.Element => {

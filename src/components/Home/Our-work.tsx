@@ -139,7 +139,15 @@ export default function OurWork() {
 
         {/* Gallery Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className={`grid gap-8 mb-16 ${
+            displayImages.length === 1 
+              ? 'grid-cols-1 max-w-md mx-auto' 
+              : displayImages.length === 2 
+              ? 'grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto' 
+              : displayImages.length === 3 
+              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+              : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+          }`}>
             {displayImages.map((img) => (
               <div
                 key={img.id}
