@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ContactInfo {
   phone: string;
@@ -33,7 +34,6 @@ interface ContactInfoSectionProps {
   operatingHours?: OperatingHours;
   featuredServices?: ServiceItem[];
   socialLinks?: SocialLink[];
-  onNavigateToServices?: () => void;
 }
 
 const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
@@ -80,8 +80,13 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
       ),
     },
   ],
-  onNavigateToServices = () => console.log("Navigate to services"),
 }) => {
+  const navigate = useNavigate();
+
+  const handleNavigateToServices = () => {
+    navigate("/services");
+  };
+
   return (
     <div
       className={`w-full md:w-1/2 space-y-8 px-4 sm:px-6 md:px-8 ${className}`}
@@ -284,7 +289,7 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
 
         <div className="flex justify-center">
           <button
-            onClick={onNavigateToServices}
+            onClick={handleNavigateToServices}
             className="group/button bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-8 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/25 hover:-translate-y-0.5"
           >
             <span className="flex items-center gap-2">

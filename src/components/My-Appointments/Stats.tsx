@@ -1,10 +1,9 @@
 import React from "react";
-import { Calendar, Clock, CreditCard, CheckCircle } from "lucide-react";
+import { Calendar, Clock, CheckCircle } from "lucide-react";
 
 export interface AppointmentStatsData {
   total: number;
   upcoming: number;
-  paymentPending: number;
   confirmed: number;
   cancelled: number;
 }
@@ -28,12 +27,6 @@ const AppointmentStats: React.FC<AppointmentStatsProps> = ({ stats }) => {
       icon: Clock,
     },
     {
-      label: "Payment Pending",
-      value: stats.paymentPending,
-      color: "bg-yellow-500",
-      icon: CreditCard,
-    },
-    {
       label: "Confirmed",
       value: stats.confirmed,
       color: "bg-purple-500",
@@ -42,7 +35,7 @@ const AppointmentStats: React.FC<AppointmentStatsProps> = ({ stats }) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
       {statCards.map((stat, index) => (
         <div key={index} className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center">

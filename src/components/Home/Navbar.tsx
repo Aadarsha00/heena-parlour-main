@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 // Type definitions for better type safety
 interface NavItem {
@@ -7,9 +8,7 @@ interface NavItem {
   requiresAuth?: boolean;
 }
 
-interface NavbarProps {
-  isAuthenticated?: boolean;
-}
+
 
 const navItems: NavItem[] = [
   { label: "Home", href: "/" },
@@ -21,8 +20,9 @@ const navItems: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Navbar({ isAuthenticated = false }: NavbarProps) {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { isAuthenticated } = useAuth();
 
   const toggleMenu = (): void => {
     setIsMenuOpen((prev) => !prev);

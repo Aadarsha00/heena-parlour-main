@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-pattern */
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getPartyServices } from "../../api/services.api";
@@ -8,79 +9,118 @@ import type { JSX } from "react";
 
 interface ServiceCardProps {
   service: Service;
-  onBookNow: (e: React.MouseEvent, serviceId: number) => void;
   index: number;
 }
 
-const ServiceCard = ({ service, onBookNow, index }: ServiceCardProps) => (
+// This is the ServiceCard from LashServices - now used in HennaServices
+const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => (
   <div
-    className="group bg-gradient-to-br from-white to-amber-50/30 backdrop-blur-sm border border-amber-100/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-700 hover:-translate-y-2 flex flex-col h-full"
-    style={{
-      animationDelay: `${index * 150}ms`,
-      animation: "fadeInUp 0.8s ease-out forwards",
-    }}
+    className="group relative bg-white/80 backdrop-blur-sm border border-black/5 rounded-3xl p-10 hover:bg-white transition-all duration-700 hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-1"
+    style={{ animationDelay: `${index * 100}ms` }}
   >
-    {/* Header with Price Badge */}
-    <div className="flex justify-between items-start mb-6">
-      <div className="flex-1">
-        <h3 className="text-xl font-medium text-gray-900 mb-3 group-hover:text-amber-700 transition-colors duration-300">
-          {service.name}
-        </h3>
-        <p className="text-gray-600 font-light leading-relaxed mb-4">
+    {/* Luxury corner accent */}
+    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-300/10 via-yellow-400/5 to-transparent rounded-bl-[3rem] pointer-events-none" />
+    <div className="absolute top-3 right-3 w-2 h-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full opacity-60" />
+
+    <div className="relative z-10">
+      {/* Service Header */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-2xl font-display font-light text-black tracking-tight leading-tight">
+            {service.name}
+          </h3>
+          <div className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 text-black text-sm font-medium px-5 py-2 rounded-full shadow-lg shadow-yellow-500/20">
+            ${service.price}
+          </div>
+        </div>
+
+        <p className="text-gray-600 text-base leading-relaxed font-light">
           {service.description}
         </p>
-        <div className="flex items-center gap-2 text-sm text-gray-500">
-          <svg
-            className="w-4 h-4 text-amber-500"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <span>{service.duration_minutes} minutes</span>
-        </div>
       </div>
 
-      <div className="ml-4 flex-shrink-0">
-        <div className="bg-gradient-to-r from-gray-900 to-black text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-          ${service.price}
-        </div>
-      </div>
-    </div>
+      {/* Divider */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-black/10 to-transparent mb-8" />
 
-    {/* Book Now Button */}
-    <div className="mt-auto flex justify-end">
-      <Link
-        to={`/booking/${service.id}`}
-        onClick={(e) => onBookNow(e, service.id)}
-        className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-500 text-black rounded-full font-medium hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:scale-105"
-      >
-        Book Now
-        <svg
-          className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      {/* Service Footer */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-1.5 h-1.5 bg-amber-400 rounded-full" />
+          <span className="text-gray-500 text-sm font-medium tracking-wider uppercase">
+            {service.duration_minutes} min
+          </span>
+        </div>
+
+        <Link
+          to={`/booking/${service.id}`}
+          className="group/btn relative bg-black text-white text-sm font-medium px-8 py-3 rounded-full overflow-hidden transition-all duration-300 hover:bg-gray-900 hover:shadow-xl hover:shadow-black/20"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17 8l4 4m0 0l-4 4m4-4H3"
-          />
-        </svg>
-      </Link>
+          <span className="relative z-10">Reserve Now</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-400/0 via-amber-400/10 to-amber-400/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+        </Link>
+      </div>
     </div>
   </div>
 );
 
-const PartyPackageCard = ({ service, onBookNow, index }: ServiceCardProps) => {
+// Static Contact Us Card with the same design as ServiceCard
+const ContactUsCard: React.FC<{ index: number }> = ({ index }) => (
+  <div
+    className="group relative bg-white/80 backdrop-blur-sm border border-black/5 rounded-3xl p-10 hover:bg-white transition-all duration-700 hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-1"
+    style={{ animationDelay: `${index * 100}ms` }}
+  >
+    {/* Luxury corner accent */}
+    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-300/10 via-yellow-400/5 to-transparent rounded-bl-[3rem] pointer-events-none" />
+    <div className="absolute top-3 right-3 w-2 h-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full opacity-60" />
+
+    <div className="relative z-10">
+      {/* Service Header */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-2xl font-display font-light text-black tracking-tight leading-tight">
+            Custom Services
+          </h3>
+          <div className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 text-black text-sm font-medium px-5 py-2 rounded-full shadow-lg shadow-yellow-500/20">
+            Custom
+          </div>
+        </div>
+
+        <p className="text-gray-600 text-base leading-relaxed font-light">
+          Looking for something unique? We offer personalized henna designs and packages tailored to your special event. Get in touch with us to discuss your vision.
+        </p>
+      </div>
+
+      {/* Divider */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-black/10 to-transparent mb-8" />
+
+      {/* Service Footer */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-1.5 h-1.5 bg-amber-400 rounded-full" />
+          <span className="text-gray-500 text-sm font-medium tracking-wider uppercase">
+            Flexible
+          </span>
+        </div>
+
+        <Link
+          to="/contact"
+          className="group/btn relative bg-black text-white text-sm font-medium px-8 py-3 rounded-full overflow-hidden transition-all duration-300 hover:bg-gray-900 hover:shadow-xl hover:shadow-black/20"
+        >
+          <span className="relative z-10">Contact Us</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-amber-400/0 via-amber-400/10 to-amber-400/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
+        </Link>
+      </div>
+    </div>
+  </div>
+);
+
+interface PartyPackageCardProps {
+  service: Service;
+  onBookNow: (e: React.MouseEvent, serviceId: number) => void;
+  index: number;
+}
+
+const PartyPackageCard = ({ service, onBookNow, index }: PartyPackageCardProps) => {
   const features = [
     { icon: "✨", text: "Bridal Henna Packages" },
     { icon: "👥", text: "Group Event Services" },
@@ -318,24 +358,19 @@ export default function HennaServices(): JSX.Element {
           </p>
         </div>
 
-        {/* Individual Services */}
-        {individualServices.length > 0 && (
-          <div className="mb-20">
-            <h3 className="text-2xl font-light text-gray-900 mb-8 text-center">
-              Individual Services
-            </h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {individualServices.map((service: Service, index) => (
-                <ServiceCard
-                  key={service.id}
-                  service={service}
-                  onBookNow={handleBookNow}
-                  index={index}
-                />
-              ))}
-            </div>
+        {/* Individual Services - Now using the same ServiceCard as LashServices + Contact Us Card */}
+        <div className="mb-20">
+          <h3 className="text-2xl font-light text-gray-900 mb-8 text-center">
+            Individual Services
+          </h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-10 max-w-6xl mx-auto">
+            {individualServices.map((service: Service, index) => (
+              <ServiceCard key={service.id} service={service} index={index} />
+            ))}
+            {/* Static Contact Us Card */}
+            <ContactUsCard index={individualServices.length} />
           </div>
-        )}
+        </div>
 
         {/* Party Packages */}
         {partyPackages.length > 0 && (
