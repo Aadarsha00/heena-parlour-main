@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import logo from "/pictures/logo.png";
 interface LoadingScreenProps {
   companyName?: string;
   progress?: number;
@@ -58,8 +57,8 @@ const LoadingScreen = ({
         }}
       >
         <img
-          src={logo}
-          alt="Logo"
+          src="/pictures/logo.webp"
+          alt="Heena Parlour Baltimore - Professional henna, threading and lash services"
           style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>

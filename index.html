@@ -1,13 +1,244 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Character Encoding & Viewport -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Henna Services & Threading Salon in Baltimore, Maryland | Book Online</title>
+    <meta name="description" content="Best henna parlour in Baltimore, Maryland | Professional threading, lash extensions & bridal henna services near you. Book appointments online today!" />
+    <meta name="keywords" content="henna services Baltimore, threading salon Baltimore MD, lash extensions Baltimore, bridal henna artist Maryland, beauty parlour near me" />
+    <link rel="canonical" href="https://beautifulbrowsandhenna.com/" />
+    
+    <!-- Google Search Console Verification -->
+     <meta name="google-site-verification" content="ULaDHKqYMbhPJLmS3dO0MrIdyZlV-0WF-py5EGpzb5U" />
+    
+    <!-- Geolocation Meta Tags (For "Near Me" Searches) -->
+    <meta name="geo.placename" content="Baltimore, Maryland" />
+    <meta name="geo.region" content="US-MD" />
+    <meta name="geo.position" content="39.2904;-76.6122" />
+    <meta name="ICBM" content="39.2904,-76.6122" />
+    
+    <!-- Open Graph Tags (Social Media) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Heena Parlour Baltimore - Professional Henna, Threading & Lash Services" />
+    <meta property="og:description" content="Premium beauty salon in Baltimore offering professional henna, threading, and lash extensions. Book your appointment online." />
+    <meta property="og:url" content="https://beautifulbrowsandhenna.com/" />
+    <meta property="og:site_name" content="Heena Parlour Baltimore" />
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Heena Parlour Baltimore - Professional Beauty Services" />
+    <meta name="twitter:description" content="Best henna parlour in Baltimore, Maryland | Professional threading, lash extensions & bridal henna services" />
+    
+    <!-- Additional SEO Tags -->
+    <meta name="language" content="English" />
+    <meta name="author" content="Heena Parlour Baltimore" />
+    <meta name="publisher" content="Heena Parlour Baltimore" />
+    <meta name="robots" content="index, follow" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- LLM & AI-Friendly Content Links -->
+    <link rel="alternate" href="/llm.txt" type="text/plain" title="LLM-friendly business information" />
+    <meta property="ai:allowance" content="https://beautifulbrowsandhenna.com/llm.txt" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="shortcut icon" href="/vite.svg" />
+    
+    <!-- Performance & SEO Optimization -->
+    <!-- DNS Prefetch for faster API resolution -->
+    <link rel="dns-prefetch" href="https://js.stripe.com">
+    <link rel="dns-prefetch" href="https://api.opensheet.elk.sh">
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Structured Data - LocalBusiness Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Heena Parlour Baltimore",
+      "image": "https://beautifulbrowsandhenna.com/logo.png",
+      "description": "Professional beauty salon offering henna services, threading, and lash extensions in Baltimore, Maryland",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Baltimore",
+        "addressLocality": "Baltimore",
+        "addressRegion": "MD",
+        "postalCode": "21201",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "39.2904",
+        "longitude": "-76.6122"
+      },
+      "url": "https://beautifulbrowsandhenna.com/",
+      "telephone": "",
+      "priceRange": "$$",
+      "areaServed": {
+        "@type": "City",
+        "name": "Baltimore",
+        "geo": {
+          "@type": "GeoShape",
+          "name": "Baltimore Metropolitan Area"
+        }
+      },
+      "serviceArea": {
+        "@type": "City",
+        "name": "Baltimore, Maryland"
+      },
+      "knowsAbout": [
+        "Henna Services",
+        "Threading Services",
+        "Lash Extensions"
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data - Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Heena Parlour Baltimore",
+      "url": "https://beautifulbrowsandhenna.com/",
+      "logo": "https://beautifulbrowsandhenna.com/logo.png",
+      "description": "Professional beauty salon in Baltimore, Maryland",
+      "sameAs": [
+        "https://www.facebook.com/heena-parlour-baltimore",
+        "https://www.instagram.com/heena-parlour-baltimore"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite Schema (For Sitelinks Search Box) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Heena Parlour Baltimore",
+      "url": "https://beautifulbrowsandhenna.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://beautifulbrowsandhenna.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://beautifulbrowsandhenna.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://beautifulbrowsandhenna.com/services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "About",
+          "item": "https://beautifulbrowsandhenna.com/about"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Gallery",
+          "item": "https://beautifulbrowsandhenna.com/gallery"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Blog",
+          "item": "https://beautifulbrowsandhenna.com/blog"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data - FAQPage Schema (For "Near Me" Searches) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What henna services do you offer near me in Baltimore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer professional henna services including bridal henna, traditional mehendi, custom designs, and party henna in Baltimore, Maryland. Book your appointment online today!"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Best threading salon near me in Baltimore - do you have eyebrow threading?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! We provide expert eyebrow and facial threading services in Baltimore. Our professional beauticians deliver perfect results for your brows and facial hair removal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer lash extensions in Baltimore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We specialize in premium lash extensions and lash enhancement services in Baltimore, Maryland. Our certified lash specialists use high-quality materials for beautiful, long-lasting results."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I book a beauty appointment online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can easily book your appointment on our website at beautifulbrowsandhenna.com. Select your service, preferred date and time, and complete the booking process. We also accept online payments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the service area for Heena Parlour Baltimore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We are located in Baltimore, Maryland and serve the Baltimore metropolitan area. Our salon is conveniently located for customers seeking professional beauty services."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you a professional beauty salon in Maryland?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Heena Parlour Baltimore is a professional beauty salon in Maryland with expert beauticians specializing in henna, threading, and lash extensions. We pride ourselves on quality and customer satisfaction."
+          }
+        }
+      ]
+    }
+    </script>
+    
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" defer src="/src/main.tsx"></script>
   </body>
 </html>

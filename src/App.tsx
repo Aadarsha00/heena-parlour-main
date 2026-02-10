@@ -18,6 +18,7 @@ import { Blog } from "./pages/Blog";
 import BlogDetailPage from "./components/Blogs/Blog-Deatil";
 import ProtectedRoute from "./context/Protected-Route";
 import { Testimonial } from "./pages/Testimonial";
+import { Sitemap } from "./pages/Sitemap";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/testimonials" element={<Testimonial />} />
+          <Route path="/sitemap" element={<Sitemap />} />
         </Routes>
         <Toaster />
       </AuthProvider>

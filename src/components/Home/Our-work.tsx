@@ -37,28 +37,28 @@ export default function OurWork() {
   const fallbackImages: LocalGalleryItem[] = [
     {
       id: 1,
-      image_url: "/pictures/image1.jpg",
+      image_url: "/pictures/image1.webp",
       caption: "Premium Lash Extensions",
       category: "lashes",
       is_featured: false,
     },
     {
       id: 2,
-      image_url: "/pictures/img2.jpg",
+      image_url: "/pictures/img2.webp",
       caption: "Intricate Henna Artistry",
       category: "henna",
       is_featured: false,
     },
     {
       id: 3,
-      image_url: "/pictures/img4.jpg",
+      image_url: "/pictures/img4.webp",
       caption: "Precision Brow Sculpting",
       category: "brows",
       is_featured: false,
     },
     {
       id: 4,
-      image_url: "/pictures/services.jpg",
+      image_url: "/pictures/services.png",
       caption: "Flawless Beauty Services",
       category: "henna",
       is_featured: false,
@@ -139,15 +139,7 @@ export default function OurWork() {
 
         {/* Gallery Grid */}
         {!isLoading && (
-          <div className={`grid gap-8 mb-16 ${
-            displayImages.length === 1 
-              ? 'grid-cols-1 max-w-md mx-auto' 
-              : displayImages.length === 2 
-              ? 'grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto' 
-              : displayImages.length === 3 
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-              : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
-          }`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {displayImages.map((img) => (
               <div
                 key={img.id}

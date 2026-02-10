@@ -7,8 +7,8 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({
-  heroImage = "/pictures/hero.png",
-  storyImage = "/pictures/hero.png",
+  heroImage = "/pictures/hero.webp",
+  storyImage = "/pictures/hero.webp",
 }) => {
   return (
     <section className="w-full flex flex-col items-center bg-white overflow-x-hidden">

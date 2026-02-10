@@ -208,7 +208,7 @@ export default function BlogGrid() {
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <img
                           src={getImageUrl(post.featured_image_url)}
-                          alt={post.title}
+                          alt={`${post.title} - Professional beauty blog from Heena Parlour Baltimore henna services, threading salon and lash extensions`}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src =
