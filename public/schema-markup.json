@@ -1,0 +1,451 @@
+{
+  "localBusinessWithServices": {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "@id": "https://beautifulbrowsandhenna.com/#organization",
+    "name": "Beautiful Brows & Henna",
+    "alternateName": "Heena Parlour Baltimore",
+    "description": "Award-winning beauty salon in Baltimore, Maryland specializing in professional henna services, eyebrow threading, and lash extensions. Serving Baltimore since 2020 with expert bridal henna artistry and precision threading techniques.",
+    "url": "https://beautifulbrowsandhenna.com",
+    "logo": "https://beautifulbrowsandhenna.com/pictures/logo.webp",
+    "image": [
+      "https://beautifulbrowsandhenna.com/pictures/hero1.webp",
+      "https://beautifulbrowsandhenna.com/pictures/services.png",
+      "https://beautifulbrowsandhenna.com/pictures/Award2.jpeg"
+    ],
+    "telephone": "+1-443-574-4362",
+    "email": "info@beautifulbrowsandhenna.com",
+    "priceRange": "$$",
+    "currenciesAccepted": "USD",
+    "paymentAccepted": "Cash, Credit Card, Debit Card, Online Payment",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Beauty Lane",
+      "addressLocality": "Baltimore",
+      "addressRegion": "MD",
+      "postalCode": "21201",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "39.2904",
+      "longitude": "-76.6122"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Baltimore",
+        "sameAs": "https://en.wikipedia.org/wiki/Baltimore"
+      },
+      {
+        "@type": "State",
+        "name": "Maryland",
+        "sameAs": "https://en.wikipedia.org/wiki/Maryland"
+      }
+    ],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "10:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "10:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "11:00",
+        "closes": "17:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "award": "Best of Baltimore 2025 - Beauty Services",
+    "slogan": "Where Beauty Meets Tradition",
+    "knowsAbout": [
+      "Henna Art",
+      "Eyebrow Threading",
+      "Lash Extensions",
+      "Bridal Henna",
+      "Mehndi Design",
+      "Beauty Treatments"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Beauty Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Henna Design Services",
+            "description": "Professional henna tattoo artistry including bridal henna, traditional mehndi designs, and custom patterns for any occasion",
+            "serviceType": "Henna Art & Mehndi Design",
+            "areaServed": "Baltimore, Maryland",
+            "provider": {
+              "@id": "https://beautifulbrowsandhenna.com/#organization"
+            }
+          },
+          "price": "Starting at $25",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Eyebrow Threading",
+            "description": "Precision eyebrow threading for perfectly sculpted brows using traditional techniques",
+            "serviceType": "Threading & Brow Shaping",
+            "areaServed": "Baltimore, Maryland",
+            "provider": {
+              "@id": "https://beautifulbrowsandhenna.com/#organization"
+            }
+          },
+          "price": "Starting at $12",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Lash Extensions",
+            "description": "Premium lash extension services including classic, volume, and hybrid styles for stunning eyes",
+            "serviceType": "Eyelash Extensions",
+            "areaServed": "Baltimore, Maryland",
+            "provider": {
+              "@id": "https://beautifulbrowsandhenna.com/#organization"
+            }
+          },
+          "price": "Starting at $80",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Bridal Henna Package",
+            "description": "Comprehensive bridal henna services with intricate traditional and modern designs for your special day",
+            "serviceType": "Bridal Mehndi & Wedding Henna",
+            "areaServed": "Baltimore, Maryland",
+            "provider": {
+              "@id": "https://beautifulbrowsandhenna.com/#organization"
+            }
+          },
+          "price": "Starting at $150",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    "potentialAction": {
+      "@type": "ReserveAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://beautifulbrowsandhenna.com/booking",
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/MobileWebPlatform"
+        ]
+      },
+      "result": {
+        "@type": "Reservation",
+        "name": "Beauty Service Appointment"
+      }
+    },
+    "sameAs": [
+      "https://www.facebook.com/beautifulbrowshenna",
+      "https://www.instagram.com/beautifulbrowshenna",
+      "https://www.yelp.com/biz/beautiful-brows-henna-baltimore"
+    ]
+  },
+  "servicesOffered": {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Beauty Services at Beautiful Brows & Henna Baltimore",
+    "description": "Complete range of professional beauty services including henna art, threading, and lash extensions",
+    "numberOfItems": 7,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Service",
+          "@id": "https://beautifulbrowsandhenna.com/services#henna",
+          "name": "Henna Design Services",
+          "description": "Traditional and contemporary henna tattoo designs for all occasions",
+          "image": "https://beautifulbrowsandhenna.com/pictures/img2.webp",
+          "serviceType": "Henna Art & Mehndi",
+          "provider": {
+            "@id": "https://beautifulbrowsandhenna.com/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Baltimore",
+            "containedIn": "Maryland, USA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "25.00",
+            "priceCurrency": "USD",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "25.00",
+              "priceCurrency": "USD"
+            }
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Service",
+          "@id": "https://beautifulbrowsandhenna.com/services#threading",
+          "name": "Eyebrow Threading",
+          "description": "Precision threading for perfectly shaped eyebrows",
+          "image": "https://beautifulbrowsandhenna.com/pictures/image1.webp",
+          "serviceType": "Threading & Hair Removal",
+          "provider": {
+            "@id": "https://beautifulbrowsandhenna.com/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Baltimore",
+            "containedIn": "Maryland, USA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "12.00",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Service",
+          "@id": "https://beautifulbrowsandhenna.com/services#lashes",
+          "name": "Lash Extensions",
+          "description": "Premium eyelash extensions for volume and length",
+          "image": "https://beautifulbrowsandhenna.com/pictures/img4.webp",
+          "serviceType": "Eyelash Extensions",
+          "provider": {
+            "@id": "https://beautifulbrowsandhenna.com/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Baltimore",
+            "containedIn": "Maryland, USA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "80.00",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Service",
+          "@id": "https://beautifulbrowsandhenna.com/services#bridal-henna",
+          "name": "Bridal Henna",
+          "description": "Intricate bridal mehndi designs for weddings and special events",
+          "image": "https://beautifulbrowsandhenna.com/pictures/img2.webp",
+          "serviceType": "Bridal Mehndi Art",
+          "provider": {
+            "@id": "https://beautifulbrowsandhenna.com/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Baltimore",
+            "containedIn": "Maryland, USA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "150.00",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "Service",
+          "@id": "https://beautifulbrowsandhenna.com/services#facial-threading",
+          "name": "Full Face Threading",
+          "description": "Complete facial hair removal using traditional threading technique",
+          "serviceType": "Facial Hair Removal",
+          "provider": {
+            "@id": "https://beautifulbrowsandhenna.com/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Baltimore",
+            "containedIn": "Maryland, USA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "35.00",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "Service",
+          "@id": "https://beautifulbrowsandhenna.com/services#lash-lift",
+          "name": "Lash Lift & Tint",
+          "description": "Natural lash enhancement with lift and tinting treatment",
+          "serviceType": "Lash Treatment",
+          "provider": {
+            "@id": "https://beautifulbrowsandhenna.com/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Baltimore",
+            "containedIn": "Maryland, USA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "65.00",
+            "priceCurrency": "USD"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "item": {
+          "@type": "Service",
+          "@id": "https://beautifulbrowsandhenna.com/services#brow-tint",
+          "name": "Eyebrow Tinting",
+          "description": "Professional brow tinting for fuller, defined eyebrows",
+          "serviceType": "Brow Enhancement",
+          "provider": {
+            "@id": "https://beautifulbrowsandhenna.com/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Baltimore",
+            "containedIn": "Maryland, USA"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "20.00",
+            "priceCurrency": "USD"
+          }
+        }
+      }
+    ]
+  },
+  "bookingAction": {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Beautiful Brows & Henna Online Booking",
+    "url": "https://beautifulbrowsandhenna.com/booking",
+    "description": "Book your henna, threading, or lash extension appointment online at Beautiful Brows & Henna Baltimore",
+    "applicationCategory": "BeautyApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Online Appointment Booking",
+      "Service Selection",
+      "Instant Confirmation",
+      "Payment Processing",
+      "Appointment Management"
+    ],
+    "provider": {
+      "@id": "https://beautifulbrowsandhenna.com/#organization"
+    },
+    "potentialAction": {
+      "@type": "UseAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://beautifulbrowsandhenna.com/booking",
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/IOSPlatform",
+          "http://schema.org/AndroidPlatform"
+        ],
+        "httpMethod": "GET"
+      },
+      "object": {
+        "@type": "Service",
+        "name": "Beauty Service Appointment",
+        "provider": {
+          "@id": "https://beautifulbrowsandhenna.com/#organization"
+        }
+      }
+    }
+  },
+  "aboutPage": {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Beautiful Brows & Henna - Award-Winning Beauty Salon Baltimore MD",
+    "url": "https://beautifulbrowsandhenna.com/about",
+    "description": "Learn about Beautiful Brows & Henna, Baltimore's premier beauty salon specializing in henna art, threading, and lash extensions. Award-winning service since 2020.",
+    "mainEntity": {
+      "@id": "https://beautifulbrowsandhenna.com/#organization"
+    },
+    "about": {
+      "@type": "BeautySalon",
+      "@id": "https://beautifulbrowsandhenna.com/#organization",
+      "award": "Best of Baltimore 2025 - Beauty Services Category",
+      "foundingDate": "2020",
+      "founder": {
+        "@type": "Person",
+        "name": "Heena Master Artist",
+        "jobTitle": "Master Henna Artist & Beauty Specialist"
+      },
+      "knowsAbout": [
+        "Traditional Henna Art",
+        "Bridal Mehndi Design",
+        "Eyebrow Threading Techniques",
+        "Lash Extension Application",
+        "Beauty Consultation",
+        "Skin Care"
+      ],
+      "slogan": "Where Beauty Meets Tradition"
+    },
+    "specialty": [
+      {
+        "@type": "Service",
+        "name": "Bridal Henna Artistry",
+        "description": "Specializing in intricate bridal mehndi designs combining traditional and contemporary styles"
+      },
+      {
+        "@type": "Service",
+        "name": "Precision Threading",
+        "description": "Expert eyebrow shaping using ancient threading techniques for perfect brows"
+      },
+      {
+        "@type": "Service",
+        "name": "Premium Lash Extensions",
+        "description": "High-quality lash extensions for natural to dramatic looks"
+      }
+    ]
+  }
+}

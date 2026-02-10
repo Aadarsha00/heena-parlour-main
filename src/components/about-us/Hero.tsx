@@ -17,7 +17,7 @@ const Hero: React.FC<HeroProps> = ({
         <div className="relative h-[85vh] min-h-[700px] max-h-[900px]">
           <img
             src={heroImage}
-            alt="Luxurious salon interior showcasing premium beauty services"
+            alt="Award-Winning Beauty Salon in Baltimore MD | Beautiful Brows & Henna Professional Threading Henna Lash Extensions"
             className="w-full h-full object-cover"
             loading="eager"
           />
@@ -139,7 +139,7 @@ const Hero: React.FC<HeroProps> = ({
               <div className="relative overflow-hidden bg-white">
                 <img
                   src={storyImage}
-                  alt="Elegant salon interior showcasing our commitment to luxury and quality"
+                  alt="Best Henna Artist & Threading Specialist Baltimore MD | Our Story Beautiful Brows & Henna Salon"
                   className="w-full h-[500px] object-cover transition-transform duration-700 hover:scale-105"
                   loading="lazy"
                 />

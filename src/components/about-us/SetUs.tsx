@@ -135,7 +135,7 @@ const WhatSetsUsApart: React.FC<WhatSetsUsApartProps> = ({
                   <div className="aspect-square overflow-hidden">
                     <img
                       src={src}
-                      alt={`Professional beauty service at Heena Parlour Baltimore - threading, henna and lash extensions salon feature ${index + 1}`}
+                      alt={`Professional ${index === 0 ? 'Eyebrow Threading' : index === 1 ? 'Henna Mehndi Design' : index === 2 ? 'Lash Extensions' : 'Beauty Services'} Baltimore MD | Beautiful Brows & Henna Salon Near Me`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />

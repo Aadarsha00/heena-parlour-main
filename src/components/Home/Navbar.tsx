@@ -51,7 +51,7 @@ export default function Navbar({ isAuthenticated = false }: NavbarProps) {
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-200">
                 <img
                   src="/pictures/logo.webp"
-                  alt="Company Logo"
+                  alt="Beautiful Brows & Henna - Professional Threading, Henna & Lash Extensions in Baltimore MD"
                   className="w-6 h-6 object-contain"
                 />
               </div>
