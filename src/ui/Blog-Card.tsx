@@ -42,7 +42,7 @@ const BlogCard = ({
       <div className="relative h-48 overflow-hidden">
         <img
           src={image}
-          alt={title}
+          alt={`${title} - Professional beauty blog from Heena Parlour Baltimore henna services and threading salon`}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           onError={(e) => {
             e.currentTarget.src = "/placeholder-image.jpg"; // fallback image

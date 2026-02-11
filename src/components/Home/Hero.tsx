@@ -1,5 +1,6 @@
 import { Eye, Palette, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Type definitions
 interface HeroImage {
@@ -14,16 +15,16 @@ interface GalleryImage {
 }
 
 const heroImages: HeroImage = {
-  desktop: "/pictures/hero1.png",
-  mobile: "/pictures/mobile-hero.png",
+  desktop: "/pictures/hero1.webp",
+  mobile: "/pictures/mobile-hero.webp",
   alt: "Beautiful Eyebrow Threading & Henna - Premium Beauty Services",
 };
 
 const galleryImages: GalleryImage[] = [
-  { src: "/pictures/image1.jpg", alt: "Expert eyebrow threading service" },
-  { src: "/pictures/img2.jpg", alt: "Artistic henna design application" },
-  { src: "/pictures/img3.png", alt: "Luxurious lash extension service" },
-  { src: "/pictures/img4.jpg", alt: "Premium beauty treatment results" },
+  { src: "/pictures/image1.webp", alt: "Expert eyebrow threading service" },
+  { src: "/pictures/img2.webp", alt: "Artistic henna design application" },
+  { src: "/pictures/img3.webp", alt: "Luxurious lash extension service" },
+  { src: "/pictures/img4.webp", alt: "Premium beauty treatment results" },
 ];
 
 export default function Hero() {
@@ -91,7 +92,7 @@ export default function Hero() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <a href="/services" className="group">
+                <Link to="/services" className="group">
                   <button className="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white px-8 py-4 rounded-2xl text-base font-medium transition-all duration-300 hover:shadow-xl hover:shadow-amber-200/50 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2">
                     <span className="flex items-center justify-center gap-2">
                       Book Appointment
@@ -110,9 +111,9 @@ export default function Hero() {
                       </svg>
                     </span>
                   </button>
-                </a>
+                </Link>
 
-                <a href="/about" className="group">
+                <Link to="/about" className="group">
                   <button className="w-full sm:w-auto bg-white hover:bg-neutral-50 text-neutral-800 border-2 border-neutral-900 hover:border-amber-500 px-8 py-4 rounded-2xl text-base font-medium transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2">
                     <span className="flex items-center justify-center gap-2">
                       Discover Our Story
@@ -131,7 +132,7 @@ export default function Hero() {
                       </svg>
                     </span>
                   </button>
-                </a>
+                </Link>
               </div>
 
               {/* Trust Indicators */}

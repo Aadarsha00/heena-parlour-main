@@ -4,6 +4,7 @@ import { Filter } from "lucide-react";
 export type FilterType =
   | "all"
   | "upcoming"
+  | "payment_pending"
   | "confirmed"
   | "cancelled";
 
@@ -19,6 +20,7 @@ const AppointmentFilters: React.FC<AppointmentFiltersProps> = ({
   const filters = [
     { key: "all" as FilterType, label: "All Appointments" },
     { key: "upcoming" as FilterType, label: "Upcoming" },
+    { key: "payment_pending" as FilterType, label: "Payment Pending" },
     { key: "confirmed" as FilterType, label: "Confirmed" },
     { key: "cancelled" as FilterType, label: "Cancelled" },
   ];
