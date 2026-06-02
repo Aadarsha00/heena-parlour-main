@@ -106,7 +106,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
           <img
             src={imageUrl}
-            alt={image.caption || "Gallery image"}
+            alt={`${image.caption || 'Professional beauty service'} - Henna services, threading salon, and lash extensions in Baltimore Maryland by Heena Parlour`}
             className="max-w-full max-h-[80vh] object-contain"
             onError={(e) => {
               const placeholderSvg = `data:image/svg+xml;base64,${btoa(`
@@ -171,7 +171,7 @@ const MasonryGrid: React.FC<{
             <div className="relative overflow-hidden">
               <img
                 src={imageUrl}
-                alt={item.caption || "Gallery image"}
+                alt={`${item.caption || 'Professional beauty portfolio'} - Henna tattoo design, eyebrow threading, and lash extension services in Baltimore Maryland`}
                 className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
                 onError={(e) => {

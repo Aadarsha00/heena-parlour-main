@@ -15,10 +15,10 @@ interface WhatSetsUsApartProps {
 const WhatSetsUsApart: React.FC<WhatSetsUsApartProps> = ({
   className = "",
   images = [
-    "pictures/image1.jpg",
-    "pictures/img2.jpg",
-    "pictures/img3.png",
-    "pictures/img4.jpg",
+    "pictures/image1.webp",
+    "pictures/img2.webp",
+    "pictures/img3.webp",
+    "pictures/img4.webp",
   ],
 }) => {
   const features: Feature[] = [
@@ -135,7 +135,7 @@ const WhatSetsUsApart: React.FC<WhatSetsUsApartProps> = ({
                   <div className="aspect-square overflow-hidden">
                     <img
                       src={src}
-                      alt={`Luxury salon feature ${index + 1}`}
+                      alt={`Professional ${index === 0 ? 'Eyebrow Threading' : index === 1 ? 'Henna Mehndi Design' : index === 2 ? 'Lash Extensions' : 'Beauty Services'} Baltimore MD | Beautiful Brows & Henna Salon Near Me`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />

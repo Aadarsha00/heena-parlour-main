@@ -28,7 +28,7 @@ const AwardsSection: React.FC<AwardsSectionProps> = ({
             <div className="relative overflow-hidden rounded-2xl bg-white shadow-2xl">
               <img
                 src={awardImage}
-                alt="Best of Baltimore 2025 award presented by The Baltimore Sun"
+                alt="Best of Baltimore 2025 Award Winner | Beautiful Brows & Henna Top-Rated Threading Henna Lash Salon Maryland"
                 className="w-full h-[480px] object-cover"
                 loading="lazy"
               />

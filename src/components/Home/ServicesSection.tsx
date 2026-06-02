@@ -45,7 +45,7 @@ const staticServices: StaticService[] = [
     title: "Threading",
     description:
       "Precision eyebrow shaping that enhances your natural beauty with clean, defined lines.",
-    image: "./pictures/img2.jpg",
+    image: "./pictures/img2.webp",
     apiCategory: "threading",
   },
   {
@@ -53,7 +53,7 @@ const staticServices: StaticService[] = [
     title: "Henna",
     description:
       "Intricate traditional artistry that transforms your hands into stunning masterpieces.",
-    image: "./pictures/image1.jpg",
+    image: "./pictures/image1.webp",
     apiCategory: "party",
   },
   {
@@ -61,7 +61,7 @@ const staticServices: StaticService[] = [
     title: "Lash Extension",
     description:
       "Luxurious volume and length that creates captivating, long-lasting allure.",
-    image: "./pictures/img4.jpg",
+    image: "./pictures/img4.webp",
     apiCategory: "lashes",
   },
 ];
@@ -91,7 +91,7 @@ const normalizeApiResponse = (data: ApiResponse | undefined): ApiService[] => {
 // Helper function to format price
 const formatPrice = (price: string | number): string => {
   const priceStr = String(price);
-  return priceStr.startsWith("$") ? priceStr : `${priceStr}`;
+  return priceStr.startsWith("$") ? priceStr : `$${priceStr}`;
 };
 
 const ServicesSection = (): JSX.Element => {
