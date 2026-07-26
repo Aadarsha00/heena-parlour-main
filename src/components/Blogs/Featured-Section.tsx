@@ -226,10 +226,10 @@ const FeaturedSection = (): JSX.Element => {
               <div className="relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
                 <img
-                  src={getImageSrc(filteredPosts[0], "pictures/img4.jpg")}
-                  alt={filteredPosts[0].title}
+                  src={getImageSrc(filteredPosts[0], "pictures/img4.webp")}
+                  alt={`${filteredPosts[0].title} - Beauty wellness blog from Heena Parlour Baltimore professional henna and threading salon`}
                   className="w-full h-80 lg:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
-                  onError={(e) => handleImageError(e, "pictures/img4.jpg")}
+                  onError={(e) => handleImageError(e, "pictures/img4.webp")}
                 />
 
                 {/* Overlay Content */}
@@ -287,10 +287,10 @@ const FeaturedSection = (): JSX.Element => {
               <article className="lg:col-span-4 group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-500 hover:-translate-y-1 border border-gray-100/50">
                 <div className="relative overflow-hidden">
                   <img
-                    src={getImageSrc(filteredPosts[1], "pictures/img3.png")}
-                    alt={filteredPosts[1].title}
+                    src={getImageSrc(filteredPosts[1], "pictures/img3.webp")}
+                    alt={`${filteredPosts[1].title} - Beauty care tips and wellness advice from professional henna and threading salon Heena Parlour`}
                     className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => handleImageError(e, "pictures/img3.png")}
+                    onError={(e) => handleImageError(e, "pictures/img3.webp")}
                   />
 
                   <div className="absolute top-4 right-4">

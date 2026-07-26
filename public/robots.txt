@@ -1,0 +1,45 @@
+# Robots.txt for Heena Parlour Baltimore Beauty Salon
+# https://beautifulbrowsandhenna.com/
+# Optimize for Baltimore, Maryland local searches
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /gallery
+Allow: /contact
+Allow: /blog
+Allow: /blog/*
+Allow: /testimonials
+
+# Disallow authentication and user-specific pages from indexing
+Disallow: /login
+Disallow: /register
+Disallow: /booking
+Disallow: /booking/*
+Disallow: /my-appointment
+Disallow: /payment
+
+# Sitemap and AI-friendly content locations
+Sitemap: https://beautifulbrowsandhenna.com/sitemap.xml
+Sitemap: https://beautifulbrowsandhenna.com/llm.txt
+
+# LLM and AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Additional optimization for local search crawlers
+User-agent: Googlebot-Local
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /pictures/

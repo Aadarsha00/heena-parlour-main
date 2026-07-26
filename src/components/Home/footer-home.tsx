@@ -310,6 +310,12 @@ const Footer: React.FC<IFooter> = ({
                 reserved.
               </p>
               <div className="flex gap-6 text-sm">
+                <Link
+                  to="/sitemap"
+                  className="text-gray-400 hover:text-amber-400 transition-colors duration-300"
+                >
+                  Sitemap
+                </Link>
                 <a
                   href="/privacy"
                   className="text-gray-400 hover:text-amber-400 transition-colors duration-300"

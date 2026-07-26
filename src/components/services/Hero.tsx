@@ -10,14 +10,14 @@ export default function ServicesHero(): JSX.Element {
           {/* Mobile Image */}
           <img
             src="/pictures/services.png"
-            alt="Professional beauty services at Beautiful Eyebrow"
+            alt="Best Threading, Henna & Lash Extensions Services in Baltimore MD | Book Online at Beautiful Brows & Henna"
             className="absolute inset-0 w-full h-full object-cover sm:hidden"
             loading="eager"
           />
           {/* Desktop Image */}
           <img
             src="/pictures/services.png"
-            alt="Professional beauty services at Beautiful Eyebrow"
+            alt="Professional Eyebrow Threading, Bridal Henna & Premium Lash Services Baltimore Maryland Near Me"
             className="absolute inset-0 w-full h-full object-cover hidden sm:block"
             loading="eager"
           />

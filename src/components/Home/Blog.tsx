@@ -37,7 +37,7 @@ const BlogCard = ({ post, index, onReadMore }: BlogCardProps) => {
     e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const target = e.target as HTMLImageElement;
-    target.src = "pictures/img3.png";
+    target.src = "pictures/img3.webp";
   };
 
   return (
@@ -52,8 +52,8 @@ const BlogCard = ({ post, index, onReadMore }: BlogCardProps) => {
       {/* Image Container */}
       <div className="relative h-56 overflow-hidden">
         <img
-          src={post.featured_image_url || "pictures/img3.png"}
-          alt={post.title}
+          src={post.featured_image_url || "pictures/img3.webp"}
+          alt={`${post.title} - Beauty tips from Heena Parlour Baltimore professional salon`}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           onError={handleImageError}
         />
