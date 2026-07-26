@@ -12,7 +12,7 @@ export const Service: React.FC = () => {
   return (
     <div>
       <SEO
-        title="Professional Beauty Services in Baltimore, Maryland | Henna, Threading, Lash"
+        title="Beauty Services | Beautiful Brows & Henna - Henna, Threading & Lash in Baltimore"
         description="Professional henna services, eyebrow threading, and lash extensions in Baltimore, Maryland. Expert beauticians for all your beauty needs."
         keywords="professional henna Baltimore, threading salon, lash extensions Baltimore, beauty services Maryland, eyebrow threading, bridal henna"
         ogTitle="Our Beauty Services - Beautiful Brows & Henna Baltimore"

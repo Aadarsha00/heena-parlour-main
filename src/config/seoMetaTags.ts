@@ -14,7 +14,7 @@ export const pageMetaTags: { [key: string]: MetaTagConfig } = {
     title: "Henna Services & Threading Salon in Baltimore, Maryland | Book Online",
     description: "Best henna parlour in Baltimore, Maryland | Professional threading, lash extensions & bridal henna services near you. Book appointments online today!",
     keywords: "henna services Baltimore, threading salon Baltimore MD, lash extensions Baltimore, bridal henna artist Maryland, beauty parlour near me",
-    ogTitle: "Heena Parlour Baltimore - Professional Henna, Threading & Lash Services",
+    ogTitle: "Beautiful Brows & Henna - Professional Henna, Threading & Lash Services",
     ogDescription: "Premium beauty salon in Baltimore offering professional henna, threading, and lash extensions. Book your appointment online.",
   },
   
@@ -22,63 +22,63 @@ export const pageMetaTags: { [key: string]: MetaTagConfig } = {
     title: "Professional Beauty Services in Baltimore, Maryland | Henna, Threading, Lash",
     description: "Professional henna services, eyebrow threading, and lash extensions in Baltimore, Maryland. Expert beauticians for all your beauty needs.",
     keywords: "professional henna Baltimore, threading salon, lash extensions Baltimore, beauty services Maryland",
-    ogTitle: "Our Beauty Services - Heena Parlour Baltimore",
+    ogTitle: "Our Beauty Services - Beautiful Brows & Henna",
     ogDescription: "Discover our henna, threading, and lash extension services with expert beauticians in Baltimore.",
   },
   
   about: {
-    title: "About Heena Parlour Baltimore - Expert Beauty Services & Salon",
-    description: "Learn about Heena Parlour Baltimore - our expert beauticians, beauty philosophy, and commitment to quality services in Baltimore, Maryland.",
+    title: "About Beautiful Brows & Henna - Expert Beauty Services & Salon",
+    description: "Learn about Beautiful Brows & Henna - our expert beauticians, beauty philosophy, and commitment to quality services in Baltimore, Maryland.",
     keywords: "about heena parlour, expert beauticians Baltimore, beauty salon philosophy, professional beauty services",
-    ogTitle: "About Heena Parlour Baltimore",
-    ogDescription: "Discover our story and meet the expert beauticians behind Heena Parlour Baltimore.",
+    ogTitle: "About Beautiful Brows & Henna",
+    ogDescription: "Discover our story and meet the expert beauticians behind Beautiful Brows & Henna.",
   },
   
   gallery: {
-    title: "Henna & Beauty Portfolio - Heena Parlour Baltimore | View Our Work",
+    title: "Henna & Beauty Portfolio - Beautiful Brows & Henna | View Our Work",
     description: "Browse our beautiful portfolio of henna designs, threading work, and lash extensions in Baltimore, Maryland.",
     keywords: "henna portfolio Baltimore, threading results, lash extension gallery, beauty salon portfolio",
-    ogTitle: "Our Portfolio - Heena Parlour Baltimore",
+    ogTitle: "Our Portfolio - Beautiful Brows & Henna",
     ogDescription: "View our beautiful work and transformations from satisfied clients in Baltimore.",
   },
   
   blog: {
-    title: "Beauty Tips & Wellness Blog - Henna Care Guide | Heena Parlour",
+    title: "Beauty Tips & Wellness Blog - Henna Care Guide | Beautiful Brows & Henna",
     description: "Read articles on henna care, threading maintenance, lash extension tips, and beauty wellness from our expert beauticians.",
     keywords: "henna care tips, threading maintenance, lash extension care, beauty wellness articles, henna safety",
-    ogTitle: "Beauty Wellness Blog - Heena Parlour Baltimore",
+    ogTitle: "Beauty Wellness Blog - Beautiful Brows & Henna",
     ogDescription: "Expert beauty tips and wellness articles for henna, threading, and lash care.",
   },
   
   testimonials: {
-    title: "Client Reviews & Testimonials - Heena Parlour Baltimore | 5-Star Reviews",
-    description: "Read real reviews and testimonials from our satisfied clients in Baltimore who trust Heena Parlour for their beauty services.",
+    title: "Client Reviews & Testimonials - Beautiful Brows & Henna | 5-Star Reviews",
+    description: "Read real reviews and testimonials from our satisfied clients in Baltimore who trust Beautiful Brows & Henna for their beauty services.",
     keywords: "heena parlour reviews, client testimonials Baltimore, beauty salon ratings, customer reviews",
-    ogTitle: "Client Reviews - Heena Parlour Baltimore",
-    ogDescription: "See what our happy clients say about their experience at Heena Parlour Baltimore.",
+    ogTitle: "Client Reviews - Beautiful Brows & Henna",
+    ogDescription: "See what our happy clients say about their experience at Beautiful Brows & Henna.",
   },
   
   contact: {
-    title: "Contact Heena Parlour Baltimore - Get In Touch | Book Your Service",
-    description: "Contact Heena Parlour Baltimore for questions or to book your beauty appointment. Professional henna, threading, and lash services.",
+    title: "Contact Beautiful Brows & Henna - Get In Touch | Book Your Service",
+    description: "Contact Beautiful Brows & Henna for questions or to book your beauty appointment. Professional henna, threading, and lash services.",
     keywords: "contact heena parlour, beauty salon Baltimore contact, book appointment, professional beauty services",
-    ogTitle: "Contact Heena Parlour Baltimore",
+    ogTitle: "Contact Beautiful Brows & Henna",
     ogDescription: "Get in touch with us to book your next beauty service appointment in Baltimore.",
   },
   
   login: {
-    title: "Login - Heena Parlour Baltimore | Access Your Account",
-    description: "Login to your Heena Parlour account to view appointments, manage bookings, and access exclusive features.",
+    title: "Login - Beautiful Brows & Henna | Access Your Account",
+    description: "Login to your Beautiful Brows & Henna account to view appointments, manage bookings, and access exclusive features.",
     keywords: "login heena parlour, customer account, appointment management",
-    ogTitle: "Login - Heena Parlour Baltimore",
+    ogTitle: "Login - Beautiful Brows & Henna",
     ogDescription: "Access your account to manage your beauty appointments.",
   },
   
   register: {
-    title: "Create Account - Heena Parlour Baltimore | Book & Save Preferences",
-    description: "Register with Heena Parlour Baltimore to book appointments, save preferences, and manage your beauty services.",
+    title: "Create Account - Beautiful Brows & Henna | Book & Save Preferences",
+    description: "Register with Beautiful Brows & Henna to book appointments, save preferences, and manage your beauty services.",
     keywords: "register account, create profile, beauty salon membership",
-    ogTitle: "Register - Heena Parlour Baltimore",
+    ogTitle: "Register - Beautiful Brows & Henna",
     ogDescription: "Create an account to book appointments and enjoy exclusive member benefits.",
   },
 };
@@ -146,7 +146,7 @@ export const serviceMetaTags = {
  * Schema metadata for structured data
  */
 export const schemaMetadata = {
-  businessName: "Heena Parlour Baltimore",
+  businessName: "Beautiful Brows & Henna",
   businessType: "BeautySalon",
   city: "Baltimore",
   state: "Maryland",

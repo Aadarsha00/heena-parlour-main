@@ -16,7 +16,7 @@ export const Home: React.FC = () => {
   return (
     <div>
       <SEO
-        title="Henna Services & Threading Salon in Baltimore, Maryland | Book Online"
+        title="Beautiful Brows & Henna | Henna, Threading & Lash Salon in Baltimore, MD"
         description="Best henna parlour in Baltimore, Maryland | Professional threading, lash extensions & bridal henna services near you. Book appointments online today!"
         keywords="henna services Baltimore, threading salon Baltimore MD, lash extensions Baltimore, bridal henna artist Maryland, beauty parlour near me"
         ogTitle="Beautiful Brows & Henna - Professional Henna, Threading & Lash Services"
