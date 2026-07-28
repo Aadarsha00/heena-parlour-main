@@ -24,3 +24,8 @@ export interface RegisterResponse {
   last_name: string;
   phone_number: string;
 }
+
+export interface ActivateAccountRequest {
+  uid: string;
+  token: string;
+}

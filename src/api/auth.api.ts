@@ -4,6 +4,7 @@ import type {
   LoginResponse,
   RegisterRequest,
   RegisterResponse,
+  ActivateAccountRequest,
 } from "../interface/auth.interface";
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
@@ -27,6 +28,16 @@ export const registerUser = async (
 ): Promise<RegisterResponse> => {
   const response = await api.post("/auth/users/", data);  
   return response.data;
+};
+
+export const activateAccount = async (
+  data: ActivateAccountRequest
+): Promise<void> => {
+  await api.post("/auth/users/activation/", data);
+};
+
+export const resendActivation = async (email: string): Promise<void> => {
+  await api.post("/auth/users/resend_activation/", { email });
 };
 
 export interface CurrentUser {

@@ -28,6 +28,8 @@ const Login = lazy(() =>
 const Register = lazy(() =>
   import("./pages/Register").then((module) => ({ default: module.Register }))
 );
+const ActivationSent = lazy(() => import("./pages/Activation-Sent"));
+const ActivateAccount = lazy(() => import("./pages/Activate-Account"));
 const AppointmentDetailsForm = lazy(
   () => import("./components/booking/Appoinntment-Detail")
 );
@@ -97,6 +99,11 @@ function App() {
             <Route path="/blog/:slug" element={<BlogDetailPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/activation-sent" element={<ActivationSent />} />
+            <Route
+              path="/activate/:uid/:token"
+              element={<ActivateAccount />}
+            />
             <Route path="/testimonials" element={<Testimonial />} />
             <Route path="/sitemap" element={<Sitemap />} />
             <Route path="/privacy" element={<Legal kind="privacy" />} />

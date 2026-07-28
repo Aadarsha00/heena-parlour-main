@@ -118,6 +118,15 @@ const LoginForm = () => {
           <Link to="/register" className="font-medium text-[#4b4032] underline">
             Create one
           </Link>
+          <span className="mt-3 block">
+            Account needs activation?{" "}
+            <Link
+              to="/activation-sent"
+              className="font-medium text-[#4b4032] underline"
+            >
+              Resend the verification email
+            </Link>
+          </span>
         </p>
       </div>
     </main>

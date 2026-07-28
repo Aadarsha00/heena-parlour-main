@@ -23,9 +23,12 @@ const SignupForm = () => {
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: registerUser,
-    onSuccess: () => {
-      toast.success("Account created! Redirecting to login...");
-      navigate("/login"); // redirect to login after signup
+    onSuccess: (_response, variables) => {
+      toast.success("Account created. Check your email to activate it.");
+      navigate("/activation-sent", {
+        replace: true,
+        state: { email: variables.email },
+      });
     },
     onError: (err: any) => {
       const errorData = err?.response?.data;
@@ -205,6 +208,15 @@ const SignupForm = () => {
                 className="font-medium text-[#4b4032] hover:text-[#645746] transition"
               >
                 Sign in here
+              </Link>
+            </p>
+            <p className="mt-3 text-sm text-[#6f6552]">
+              Signed up but not activated?{" "}
+              <Link
+                to="/activation-sent"
+                className="font-medium text-[#4b4032] underline"
+              >
+                Resend the verification email
               </Link>
             </p>
           </div>
