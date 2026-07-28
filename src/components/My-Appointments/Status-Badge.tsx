@@ -1,4 +1,10 @@
-import { AlertCircle, CheckCircle, XCircle } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  CircleDot,
+  Clock3,
+  XCircle,
+} from "lucide-react";
 import type { AppointmentStatus } from "../../interface/appointment.interface";
 
 const STATUS_INFO: Record<
@@ -6,34 +12,34 @@ const STATUS_INFO: Record<
   { label: string; color: string; icon: typeof AlertCircle }
 > = {
   booked: {
-    label: "Awaiting confirmation",
-    color: "bg-blue-100 text-blue-800",
-    icon: AlertCircle,
+    label: "Pending confirmation",
+    color: "border-amber-200 bg-amber-50 text-amber-800",
+    icon: Clock3,
   },
   confirmed: {
     label: "Confirmed",
-    color: "bg-green-100 text-green-800",
-    icon: CheckCircle,
+    color: "border-emerald-200 bg-emerald-50 text-emerald-800",
+    icon: CheckCircle2,
   },
   completed: {
     label: "Completed",
-    color: "bg-green-100 text-green-800",
-    icon: CheckCircle,
+    color: "border-stone-200 bg-stone-50 text-stone-700",
+    icon: CheckCircle2,
   },
   cancelled: {
     label: "Cancelled",
-    color: "bg-gray-100 text-gray-700",
+    color: "border-stone-200 bg-stone-100 text-stone-600",
     icon: XCircle,
   },
   late_cancelled: {
     label: "Late cancellation",
-    color: "bg-orange-100 text-orange-800",
-    icon: XCircle,
+    color: "border-orange-200 bg-orange-50 text-orange-800",
+    icon: AlertCircle,
   },
   no_show: {
     label: "No show",
-    color: "bg-red-100 text-red-800",
-    icon: XCircle,
+    color: "border-rose-200 bg-rose-50 text-rose-700",
+    icon: CircleDot,
   },
 };
 
@@ -42,9 +48,9 @@ const StatusBadge = ({ status }: { status: AppointmentStatus }) => {
   const Icon = info.icon;
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${info.color}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${info.color}`}
     >
-      <Icon className="mr-1 h-3 w-3" />
+      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
       {info.label}
     </span>
   );

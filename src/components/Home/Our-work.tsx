@@ -70,7 +70,7 @@ export default function OurWork() {
     },
     {
       id: 4,
-      image_url: "/pictures/services.png",
+      image_url: "/pictures/services.jpg",
       caption: "Flawless Beauty Services",
       category: "henna",
       is_featured: false,
@@ -123,7 +123,8 @@ export default function OurWork() {
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
-    target.src = "/pictures/placeholder.jpg"; // Use your placeholder image
+    target.onerror = null;
+    target.src = "/pictures/image1.webp";
   };
 
   return (

@@ -106,7 +106,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
           <img
             src={imageUrl}
-            alt={`${image.caption || 'Professional beauty service'} - Henna services, threading salon, and lash extensions in Baltimore Maryland by Heena Parlour`}
+            alt={`${image.caption || "Beauty service"} at Beautiful Brows & Henna`}
             className="max-w-full max-h-[80vh] object-contain"
             onError={(e) => {
               const placeholderSvg = `data:image/svg+xml;base64,${btoa(`

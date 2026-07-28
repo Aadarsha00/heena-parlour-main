@@ -1,100 +1,105 @@
-// src/components/SEO/SEO.tsx
-// Dynamic SEO Meta Tags Component for React 19
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export interface SEOProps {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   keywords?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
   ogUrl?: string;
+  ogType?: "website" | "article";
   canonical?: string;
   noindex?: boolean;
 }
 
-export const SEO: React.FC<SEOProps> = ({
+const setMetaTag = (
+  name: string,
+  content: string | undefined,
+  useProperty = false
+) => {
+  const attribute = useProperty ? "property" : "name";
+  const selector = `meta[${attribute}="${name}"]`;
+  let element = document.head.querySelector<HTMLMetaElement>(selector);
+
+  if (!content) {
+    element?.remove();
+    return;
+  }
+
+  if (!element) {
+    element = document.createElement("meta");
+    element.setAttribute(attribute, name);
+    document.head.appendChild(element);
+  }
+
+  element.content = content;
+};
+
+const setCanonical = (href: string) => {
+  let element =
+    document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+  if (!element) {
+    element = document.createElement("link");
+    element.rel = "canonical";
+    document.head.appendChild(element);
+  }
+
+  element.href = href;
+};
+
+export default function SEO({
   title,
   description,
   keywords,
-  ogTitle,
-  ogDescription,
+  ogTitle = title,
+  ogDescription = description,
   ogImage,
   ogUrl,
+  ogType = "website",
   canonical,
   noindex = false,
-}) => {
+}: SEOProps) {
   useEffect(() => {
-    // Update document title
-    if (title) {
-      document.title = title;
-    }
+    const currentUrl = `${window.location.origin}${window.location.pathname}`;
+    const canonicalUrl = canonical ?? currentUrl;
 
-    // Update or create meta tags
-    const updateMetaTag = (name: string, content: string, property = false) => {
-      const attribute = property ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${name}"]`);
-      
-      if (content) {
-        if (!element) {
-          element = document.createElement('meta');
-          element.setAttribute(attribute, name);
-          document.head.appendChild(element);
-        }
-        element.setAttribute('content', content);
-      }
-    };
+    document.title = title;
+    setMetaTag("description", description);
+    setMetaTag("keywords", keywords);
+    setMetaTag(
+      "robots",
+      noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"
+    );
 
-    // Standard meta tags
-    if (description) updateMetaTag('description', description);
-    if (keywords) updateMetaTag('keywords', keywords);
-    
-    // Robots meta tag
-    if (noindex) {
-      updateMetaTag('robots', 'noindex, nofollow');
-    } else {
-      updateMetaTag('robots', 'index, follow');
-    }
+    setMetaTag("og:title", ogTitle, true);
+    setMetaTag("og:description", ogDescription, true);
+    setMetaTag("og:image", ogImage, true);
+    setMetaTag("og:image:alt", "Beautiful Brows & Henna salon services", true);
+    setMetaTag("og:url", ogUrl ?? canonicalUrl, true);
+    setMetaTag("og:type", ogType, true);
+    setMetaTag("og:site_name", "Beautiful Brows & Henna", true);
 
-    // Open Graph tags
-    if (ogTitle) updateMetaTag('og:title', ogTitle, true);
-    if (ogDescription) updateMetaTag('og:description', ogDescription, true);
-    if (ogImage) updateMetaTag('og:image', ogImage, true);
-    if (ogUrl) updateMetaTag('og:url', ogUrl, true);
-    
-    // Twitter Card tags
-    if (ogTitle) updateMetaTag('twitter:title', ogTitle);
-    if (ogDescription) updateMetaTag('twitter:description', ogDescription);
-    if (ogImage) updateMetaTag('twitter:image', ogImage);
+    setMetaTag("twitter:card", ogImage ? "summary_large_image" : "summary");
+    setMetaTag("twitter:title", ogTitle);
+    setMetaTag("twitter:description", ogDescription);
+    setMetaTag("twitter:image", ogImage);
+    setMetaTag("twitter:image:alt", "Beautiful Brows & Henna salon services");
 
-    // Canonical URL
-    if (canonical) {
-      let linkElement = document.querySelector('link[rel="canonical"]');
-      if (!linkElement) {
-        linkElement = document.createElement('link');
-        linkElement.setAttribute('rel', 'canonical');
-        document.head.appendChild(linkElement);
-      }
-      linkElement.setAttribute('href', canonical);
-    } else {
-      // Set canonical to current URL if not specified
-      let linkElement = document.querySelector('link[rel="canonical"]');
-      if (!linkElement) {
-        linkElement = document.createElement('link');
-        linkElement.setAttribute('rel', 'canonical');
-        document.head.appendChild(linkElement);
-      }
-      linkElement.setAttribute('href', window.location.href);
-    }
+    setCanonical(canonicalUrl);
+  }, [
+    canonical,
+    description,
+    keywords,
+    noindex,
+    ogDescription,
+    ogImage,
+    ogTitle,
+    ogType,
+    ogUrl,
+    title,
+  ]);
 
-    // Update OG:URL if not explicitly set
-    if (!ogUrl) {
-      updateMetaTag('og:url', window.location.href, true);
-    }
-  }, [title, description, keywords, ogTitle, ogDescription, ogImage, ogUrl, canonical, noindex]);
-
-  return null; // This component doesn't render anything
-};
-
-export default SEO;
+  return null;
+}

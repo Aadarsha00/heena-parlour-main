@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
+import RouteSEO from "./components/SEO/Route-SEO";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./context/Protected-Route";
 import ScrollToTop from "./ui/Scroll-Top";
@@ -30,8 +31,13 @@ const Register = lazy(() =>
 );
 const ActivationSent = lazy(() => import("./pages/Activation-Sent"));
 const ActivateAccount = lazy(() => import("./pages/Activate-Account"));
-const AppointmentDetailsForm = lazy(
-  () => import("./components/booking/Appoinntment-Detail")
+const ForgotPassword = lazy(() => import("./pages/Forgot-Password"));
+const ResetPassword = lazy(() => import("./pages/Reset-Password"));
+const BookingDetail = lazy(
+  () =>
+    import("./pages/Booking-Detail").then((module) => ({
+      default: module.BookingDetail,
+    }))
 );
 const MyAppointment = lazy(() =>
   import("./pages/My-Appointment").then((module) => ({
@@ -63,6 +69,7 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      <RouteSEO />
       <AuthProvider>
         <Suspense fallback={<PageLoader />}>
           <Routes>
@@ -83,7 +90,7 @@ function App() {
               path="/booking/:serviceId/detail"
               element={
                 <ProtectedRoute>
-                  <AppointmentDetailsForm />
+                  <BookingDetail />
                 </ProtectedRoute>
               }
             />
@@ -100,9 +107,18 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/activation-sent" element={<ActivationSent />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route
               path="/activate/:uid/:token"
               element={<ActivateAccount />}
+            />
+            <Route
+              path="/password/reset/confirm/:uid/:token"
+              element={<ResetPassword />}
+            />
+            <Route
+              path="/reset-password/:uid/:token"
+              element={<ResetPassword />}
             />
             <Route path="/testimonials" element={<Testimonial />} />
             <Route path="/sitemap" element={<Sitemap />} />

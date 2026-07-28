@@ -1,4 +1,4 @@
-import { Trash2 } from "lucide-react";
+import { LoaderCircle, X } from "lucide-react";
 import type { Appointment } from "../../interface/appointment.interface";
 
 interface CancelButtonProps {
@@ -31,10 +31,14 @@ const CancelButton = ({
       type="button"
       onClick={handleCancel}
       disabled={isLoading}
-      className="inline-flex items-center rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-100 disabled:opacity-50"
+      className="inline-flex min-h-10 items-center justify-center rounded-xl border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
     >
-      <Trash2 className="mr-2 h-4 w-4" />
-      {isLoading ? "Cancelling…" : "Cancel appointment"}
+      {isLoading ? (
+        <LoaderCircle className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+      ) : (
+        <X className="mr-2 h-4 w-4" aria-hidden="true" />
+      )}
+      {isLoading ? "Cancelling..." : "Cancel appointment"}
     </button>
   );
 };

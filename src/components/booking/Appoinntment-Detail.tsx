@@ -13,6 +13,7 @@ import {
 import { getCurrentUser } from "../../api/auth.api";
 import { getServiceById } from "../../api/services.api";
 import type { CreateAppointmentData } from "../../interface/appointment.interface";
+import { getSalonTimeZoneLabel } from "../../config/booking";
 import { formatUsdPrice } from "../../lib/format-price";
 
 const AppointmentDetailsForm = () => {
@@ -97,6 +98,9 @@ const AppointmentDetailsForm = () => {
   const service = serviceQuery.data;
   const selectedSlot = availabilityQuery.data?.slots.find(
     (slot) => slot.value === appointmentTime
+  );
+  const timeZoneLabel = getSalonTimeZoneLabel(
+    availabilityQuery.data?.time_zone
   );
   const bookingDetailsValid =
     Boolean(appointmentDate && appointmentTime && service) &&
@@ -297,6 +301,9 @@ const AppointmentDetailsForm = () => {
               <dt className="text-gray-500">When</dt>
               <dd>{dayjs(appointmentDate).format("dddd, MMMM D, YYYY")}</dd>
               <dd>{selectedSlot?.label}</dd>
+              <dd className="text-xs text-gray-500">
+                {timeZoneLabel}
+              </dd>
             </div>
             <div>
               <dt className="text-gray-500">Duration</dt>

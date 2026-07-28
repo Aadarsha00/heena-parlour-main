@@ -1,5 +1,4 @@
 import React from "react";
-import SEO from "../components/SEO/SEO";
 import Hero from "../components/Home/Hero";
 import Navbar from "../components/Home/Navbar";
 import OurWork from "../components/Home/Our-work";
@@ -15,14 +14,6 @@ import AppointmentPage from "../components/Home/Appointment-Booking";
 export const Home: React.FC = () => {
   return (
     <div>
-      <SEO
-        title="Beautiful Brows & Henna | Henna, Threading & Lash Salon in Baltimore, MD"
-        description="Best henna parlour in Baltimore, Maryland | Professional threading, lash extensions & bridal henna services near you. Book appointments online today!"
-        keywords="henna services Baltimore, threading salon Baltimore MD, lash extensions Baltimore, bridal henna artist Maryland, beauty parlour near me"
-        ogTitle="Beautiful Brows & Henna - Professional Henna, Threading & Lash Services"
-        ogDescription="Premium beauty salon in Baltimore offering professional henna, threading, and lash extensions. Book your appointment online."
-        canonical="https://beautifulbrowsandhenna.com/"
-      />
       <Navbar />
       <Hero />
       <ServicesSection />

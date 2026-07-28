@@ -1,48 +1,63 @@
-import { Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
+import { CalendarDays, CheckCircle2, Clock3, XCircle } from "lucide-react";
 
 export interface AppointmentStatsData {
   total: number;
   upcoming: number;
-  confirmed: number;
+  completed: number;
   cancelled: number;
 }
 
 const AppointmentStats = ({ stats }: { stats: AppointmentStatsData }) => {
   const cards = [
-    { label: "Total", value: stats.total, icon: Calendar, color: "bg-blue-600" },
-    { label: "Upcoming", value: stats.upcoming, icon: Clock, color: "bg-green-600" },
     {
-      label: "Confirmed",
-      value: stats.confirmed,
-      icon: CheckCircle,
-      color: "bg-purple-600",
+      label: "All bookings",
+      value: stats.total,
+      icon: CalendarDays,
+      color: "bg-[#f4ede7] text-[#8b5a3c]",
+    },
+    {
+      label: "Upcoming",
+      value: stats.upcoming,
+      icon: Clock3,
+      color: "bg-emerald-50 text-emerald-700",
+    },
+    {
+      label: "Completed",
+      value: stats.completed,
+      icon: CheckCircle2,
+      color: "bg-sky-50 text-sky-700",
     },
     {
       label: "Cancelled",
       value: stats.cancelled,
       icon: XCircle,
-      color: "bg-gray-600",
+      color: "bg-stone-100 text-stone-600",
     },
   ];
 
   return (
-    <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <dl className="grid grid-cols-2 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm lg:grid-cols-4">
       {cards.map((card) => (
-        <div key={card.label} className="rounded-lg bg-white p-4 shadow sm:p-6">
-          <div className="flex items-center">
-            <div className={`${card.color} rounded-md p-2 sm:p-3`}>
-              <card.icon className="h-5 w-5 text-white sm:h-6 sm:w-6" />
+        <div
+          key={card.label}
+          className="border-b border-stone-100 p-4 even:border-l sm:p-5 lg:border-b-0 lg:border-l lg:first:border-l-0"
+        >
+          <div className="flex items-center gap-3">
+            <div className={`${card.color} rounded-xl p-2.5`}>
+              <card.icon className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
             </div>
-            <div className="ml-3">
-              <p className="text-xs font-medium text-gray-500 sm:text-sm">
+            <div>
+              <dt className="text-xs font-medium text-stone-500 sm:text-sm">
                 {card.label}
-              </p>
-              <p className="text-xl font-semibold sm:text-2xl">{card.value}</p>
+              </dt>
+              <dd className="mt-0.5 text-xl font-semibold tracking-tight text-stone-950 sm:text-2xl">
+                {card.value}
+              </dd>
             </div>
           </div>
         </div>
       ))}
-    </div>
+    </dl>
   );
 };
 

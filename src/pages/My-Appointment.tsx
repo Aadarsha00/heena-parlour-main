@@ -4,9 +4,11 @@ import AppointmentDashboard from "../components/My-Appointments/Appointment-Dash
 
 export const MyAppointment: React.FC = () => {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col bg-[#faf9f6]">
       <Navbar />
-      <AppointmentDashboard />
+      <div className="flex-1">
+        <AppointmentDashboard />
+      </div>
       <Footer />
     </div>
   );

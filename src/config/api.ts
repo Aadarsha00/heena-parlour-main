@@ -1,8 +1,14 @@
-const CANONICAL_API_ORIGIN = "https://api.beautifulbrowsandhenna.com";
+import {
+  CANONICAL_API_BASE_URL,
+  selectApiBaseUrl,
+} from "../lib/api-url";
+
+const CANONICAL_API_ORIGIN = new URL(CANONICAL_API_BASE_URL).origin;
 const LEGACY_API_ORIGIN = "https://api-beautiful-eyebrow.ctrlbits.xyz";
 
-export const API_BASE_URL = (
-  import.meta.env.VITE_API_BASE_URL || `${CANONICAL_API_ORIGIN}/api/`
+export const API_BASE_URL = selectApiBaseUrl(
+  import.meta.env.VITE_API_BASE_URL,
+  import.meta.env.PROD
 ).replace(/\/+$/, "");
 
 const apiOrigin = API_BASE_URL.startsWith("http")

@@ -3,6 +3,10 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { getAuthContextRef } from "../../context/AuthContext";
 import { API_BASE_URL } from "../../config/api";
+import {
+  isPublicEndpoint,
+  isUnauthenticatedAuthRequest,
+} from "../../lib/api-request-policy";
 
 // Extend AxiosRequestConfig to include our custom properties
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -59,54 +63,6 @@ const isTokenValid = (
   }
 };
 
-// Helper to check if endpoint is public
-const isPublicEndpoint = (url?: string): boolean => {
-  if (!url) return false;
-  
-  const publicEndpoints = [
-    '/blog/',
-    '/blog/featured/',
-    '/blog/recent/',
-    '/blog/by_category/',
-    '/services/',
-    '/testimonials/',
-    '/gallery/',
-  ];
-  
-  return publicEndpoints.some(endpoint => url.includes(endpoint));
-};
-
-// Only these authentication requests are allowed before a user has an access
-// token. Other /auth/ routes (for example users/me and logout) are protected.
-const unauthenticatedAuthEndpoints = new Set([
-  "/auth/jwt/create/",
-  "/auth/jwt/refresh/",
-  "/auth/jwt/verify/",
-  "/auth/users/",
-  "/auth/users/activation/",
-  "/auth/users/resend_activation/",
-  "/auth/users/reset_password/",
-  "/auth/users/reset_password_confirm/",
-]);
-
-const isUnauthenticatedAuthRequest = (
-  url?: string,
-  method?: string
-): boolean => {
-  if (!url || method?.toLowerCase() !== "post") return false;
-
-  try {
-    const pathname = new URL(url, "http://localhost").pathname.replace(
-      /^\/api(?=\/)/,
-      ""
-    );
-    const normalizedPath = pathname.endsWith("/") ? pathname : `${pathname}/`;
-    return unauthenticatedAuthEndpoints.has(normalizedPath);
-  } catch {
-    return false;
-  }
-};
-
 // Helper to handle logout
 const handleLogout = () => {
   // Clear tokens
@@ -121,12 +77,9 @@ const handleLogout = () => {
   isRefreshing = false;
   failedQueue = [];
 
-  // Redirect to login with small delay to prevent race conditions
-  setTimeout(() => {
-    if (window.location.pathname !== "/login") {
-      window.location.href = "/login";
-    }
-  }, 100);
+  // ProtectedRoute handles navigation for private screens. Avoid a hard
+  // redirect here because token refresh can also fail while someone is
+  // browsing a public page.
 };
 
 // Centralized refresh token function
@@ -210,8 +163,12 @@ api.interceptors.request.use(
       config.url,
       config.method
     );
+    const isPublic =
+      config.skipAuthRedirect === true || isPublicEndpoint(config.url);
 
-    if (!canRunWithoutAccessToken) {
+    // Public requests must not refresh an expired session or send visitors to
+    // the login page. They do not require an Authorization header.
+    if (!canRunWithoutAccessToken && !isPublic) {
       const accessToken = localStorage.getItem("access");
       const refreshToken = localStorage.getItem("refresh");
 
@@ -249,7 +206,9 @@ api.interceptors.response.use(
     );
     
     // Check if this is a public endpoint
-    const isPublic = isPublicEndpoint(originalRequest?.url);
+    const isPublic =
+      originalRequest?.skipAuthRedirect === true ||
+      isPublicEndpoint(originalRequest?.url);
 
     // Handle 401 errors for non-auth endpoints
     if (

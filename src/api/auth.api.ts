@@ -5,6 +5,8 @@ import type {
   RegisterRequest,
   RegisterResponse,
   ActivateAccountRequest,
+  PasswordResetConfirmRequest,
+  PasswordResetRequest,
 } from "../interface/auth.interface";
 
 export const loginUser = async (data: LoginRequest): Promise<LoginResponse> => {
@@ -38,6 +40,18 @@ export const activateAccount = async (
 
 export const resendActivation = async (email: string): Promise<void> => {
   await api.post("/auth/users/resend_activation/", { email });
+};
+
+export const requestPasswordReset = async (
+  data: PasswordResetRequest
+): Promise<void> => {
+  await api.post("/auth/users/reset_password/", data);
+};
+
+export const confirmPasswordReset = async (
+  data: PasswordResetConfirmRequest
+): Promise<void> => {
+  await api.post("/auth/users/reset_password_confirm/", data);
 };
 
 export interface CurrentUser {

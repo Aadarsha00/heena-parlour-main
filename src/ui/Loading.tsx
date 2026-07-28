@@ -58,7 +58,7 @@ const LoadingScreen = ({
       >
         <img
           src="/pictures/logo.webp"
-          alt="Heena Parlour Baltimore - Professional henna, threading and lash services"
+          alt="Beautiful Brows & Henna"
           style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>

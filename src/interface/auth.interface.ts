@@ -29,3 +29,18 @@ export interface ActivateAccountRequest {
   uid: string;
   token: string;
 }
+
+export interface PasswordResetRequest {
+  email: string;
+}
+
+export interface PasswordResetConfirmForm {
+  new_password: string;
+  re_new_password: string;
+}
+
+export interface PasswordResetConfirmRequest
+  extends PasswordResetConfirmForm {
+  uid: string;
+  token: string;
+}

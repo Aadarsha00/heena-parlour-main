@@ -74,5 +74,6 @@ export interface AvailabilityResponse {
   date: string;
   service: number;
   duration_minutes: number;
+  time_zone?: string;
   slots: AvailableSlot[];
 }

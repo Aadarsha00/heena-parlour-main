@@ -1,5 +1,9 @@
 import * as yup from "yup";
-import type { RegisterRequest } from "../interface/auth.interface";
+import type {
+  PasswordResetConfirmForm,
+  PasswordResetRequest,
+  RegisterRequest,
+} from "../interface/auth.interface";
 
 //login
 export const loginSchema = yup.object({
@@ -25,3 +29,23 @@ export const registerSchema: yup.ObjectSchema<RegisterRequest> = yup.object({
     .matches(/^\+?\d{9,15}$/, "Use 9–15 digits, optionally beginning with +")
     .required("Phone number is required"),
 });
+
+export const passwordResetRequestSchema: yup.ObjectSchema<PasswordResetRequest> =
+  yup.object({
+    email: yup
+      .string()
+      .email("Enter a valid email address")
+      .required("Email is required"),
+  });
+
+export const passwordResetConfirmSchema: yup.ObjectSchema<PasswordResetConfirmForm> =
+  yup.object({
+    new_password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .required("New password is required"),
+    re_new_password: yup
+      .string()
+      .oneOf([yup.ref("new_password")], "Passwords must match")
+      .required("Please confirm your new password"),
+  });

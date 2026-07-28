@@ -5,23 +5,14 @@ export default function ServicesHero(): JSX.Element {
     <section className="w-full bg-white">
       {/* Hero Section */}
       <div className="relative w-full max-w-[2100px] mx-auto h-[280px] sm:h-[360px] md:h-[480px] lg:h-[640px] overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          {/* Mobile Image */}
-          <img
-            src="/pictures/services.png"
-            alt="Best Threading, Henna & Lash Extensions Services in Baltimore MD | Book Online at Beautiful Brows & Henna"
-            className="absolute inset-0 w-full h-full object-cover sm:hidden"
-            loading="eager"
-          />
-          {/* Desktop Image */}
-          <img
-            src="/pictures/services.png"
-            alt="Professional Eyebrow Threading, Bridal Henna & Premium Lash Services Baltimore Maryland Near Me"
-            className="absolute inset-0 w-full h-full object-cover hidden sm:block"
-            loading="eager"
-          />
-        </div>
+        <img
+          src="/pictures/services.jpg"
+          alt="Threading, henna, and lash beauty services"
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+        />
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>

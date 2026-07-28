@@ -29,7 +29,7 @@ const ServiceCard = ({
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <img
         src={image}
-        alt={`Professional ${title.toLowerCase()} services in Baltimore, Maryland - Heena Parlour beauty salon`}
+        alt={`${title} service at Beautiful Brows & Henna in Baltimore`}
         className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
       />
 

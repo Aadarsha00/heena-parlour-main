@@ -3,7 +3,6 @@
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Home/Navbar';
 import Footer from '../components/Home/footer-home';
-import SEO from '../components/SEO/SEO';
 import { 
   Home, 
   Scissors, 
@@ -68,13 +67,6 @@ export const Sitemap: React.FC = () => {
 
   return (
     <>
-      <SEO
-        title="Sitemap - Beautiful Brows & Henna | All Pages"
-        description="Complete sitemap of Beautiful Brows & Henna website. Find all our pages including services, gallery, blog, and contact information."
-        keywords="sitemap, site navigation, beauty services sitemap, Baltimore salon pages"
-        canonical="https://beautifulbrowsandhenna.com/sitemap"
-      />
-      
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         
@@ -165,11 +157,10 @@ export const Sitemap: React.FC = () => {
               About Beautiful Brows & Henna
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Beautiful Brows & Henna is Baltimore's premier destination for professional threading, 
-              henna art, and lash extension services. Our experienced beauticians are dedicated to 
-              enhancing your natural beauty with precision and care. Browse our complete sitemap above 
-              to explore all our services, view our gallery of work, read client testimonials, and 
-              learn more about what makes us the best choice for your beauty needs in Baltimore, Maryland.
+              Beautiful Brows & Henna is a Baltimore beauty salon offering
+              threading, henna art, lash, and related beauty services. Browse
+              the site map above to explore services, view the gallery, read
+              client testimonials, and find contact information.
             </p>
           </div>
         </div>

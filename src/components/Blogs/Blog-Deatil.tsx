@@ -276,7 +276,7 @@ const BlogDetailPage = () => {
             {blog.featured_image_url && (
               <img
                 src={getImageUrl(blog.featured_image_url)}
-                alt={`${blog.title} - Beauty wellness guide from Heena Parlour Baltimore professional henna artist threading salon`}
+                alt={`${blog.title} from the Beautiful Brows & Henna blog`}
                 className="w-full max-h-[450px] rounded-xl object-cover mb-8"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -519,7 +519,7 @@ const BlogDetailPage = () => {
                           {post.featured_image_url ? (
                             <img
                               src={getImageUrl(post.featured_image_url)}
-                              alt={`${post.title} - Beauty blog from Heena Parlour Baltimore professional henna and threading services`}
+                              alt={`${post.title} from the Beautiful Brows & Henna blog`}
                               className="w-full h-28 bg-gray-300 rounded mb-3 object-cover"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;

@@ -53,7 +53,7 @@ const BlogCard = ({ post, index, onReadMore }: BlogCardProps) => {
       <div className="relative h-56 overflow-hidden">
         <img
           src={post.featured_image_url || "pictures/img3.webp"}
-          alt={`${post.title} - Beauty tips from Heena Parlour Baltimore professional salon`}
+          alt={`${post.title} from the Beautiful Brows & Henna blog`}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           onError={handleImageError}
         />

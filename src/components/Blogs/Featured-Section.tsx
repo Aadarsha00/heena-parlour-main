@@ -123,7 +123,7 @@ const FeaturedSection = (): JSX.Element => {
 
             <p className="text-lg text-gray-600 leading-relaxed font-light max-w-2xl mb-8">
               Discover professional luxury insights, threading tutorials, henna
-              care guides, and lash maintenance tips from our certified experts.
+              care guides, salon updates, and lash maintenance articles.
             </p>
 
             {/* Premium Search */}
@@ -227,7 +227,7 @@ const FeaturedSection = (): JSX.Element => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
                 <img
                   src={getImageSrc(filteredPosts[0], "pictures/img4.webp")}
-                  alt={`${filteredPosts[0].title} - Beauty wellness blog from Heena Parlour Baltimore professional henna and threading salon`}
+                  alt={`${filteredPosts[0].title} from the Beautiful Brows & Henna blog`}
                   className="w-full h-80 lg:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
                   onError={(e) => handleImageError(e, "pictures/img4.webp")}
                 />
@@ -288,7 +288,7 @@ const FeaturedSection = (): JSX.Element => {
                 <div className="relative overflow-hidden">
                   <img
                     src={getImageSrc(filteredPosts[1], "pictures/img3.webp")}
-                    alt={`${filteredPosts[1].title} - Beauty care tips and wellness advice from professional henna and threading salon Heena Parlour`}
+                    alt={`${filteredPosts[1].title} from the Beautiful Brows & Henna blog`}
                     className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
                     onError={(e) => handleImageError(e, "pictures/img3.webp")}
                   />

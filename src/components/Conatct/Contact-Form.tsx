@@ -77,13 +77,17 @@ const ContactForm = ({
     if (!validate()) return;
     setIsSubmitting(true);
     try {
-      await api.post("/contact-messages/", {
-        name: formData.fullName.trim(),
-        email: formData.email.trim(),
-        phone: formData.phoneNumber.trim(),
-        subject: `Service enquiry: ${formData.service}`,
-        message: formData.message.trim(),
-      });
+      await api.post(
+        "/contact-messages/",
+        {
+          name: formData.fullName.trim(),
+          email: formData.email.trim(),
+          phone: formData.phoneNumber.trim(),
+          subject: `Service enquiry: ${formData.service}`,
+          message: formData.message.trim(),
+        },
+        { skipAuthRedirect: true }
+      );
       onSubmit?.(formData);
       setFormData(EMPTY_FORM);
       toast.success("Your message has been sent.");

@@ -1,20 +1,10 @@
 import Navbar from "../components/Home/Navbar";
 import Footer from "../components/Home/footer-home";
-import SEO from "../components/SEO/SEO";
 
 const Legal = ({ kind }: { kind: "privacy" | "terms" }) => {
   const privacy = kind === "privacy";
   return (
     <>
-      <SEO
-        title={`${privacy ? "Privacy Policy" : "Terms of Service"} | Beautiful Brows & Henna`}
-        description={
-          privacy
-            ? "How Beautiful Brows & Henna handles account, booking, and contact information."
-            : "Terms for using the Beautiful Brows & Henna website and appointment booking service."
-        }
-        canonical={`https://beautifulbrowsandhenna.com/${kind}`}
-      />
       <Navbar />
       <main className="mx-auto min-h-[60vh] max-w-3xl px-6 py-16">
         <h1 className="text-4xl font-semibold">

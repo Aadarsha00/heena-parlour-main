@@ -12,6 +12,10 @@ import {
 
 import { getAvailability } from "../../api/appointment.api";
 import { getServiceById } from "../../api/services.api";
+import {
+  getSalonDate,
+  getSalonTimeZoneLabel,
+} from "../../config/booking";
 import { formatUsdPrice } from "../../lib/format-price";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -21,7 +25,7 @@ const AppointmentBooking = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
   const navigate = useNavigate();
   const numericServiceId = Number(serviceId);
-  const today = dayjs().startOf("day");
+  const today = dayjs(getSalonDate()).startOf("day");
   const lastBookableDate = today.add(MAX_ADVANCE_DAYS, "day");
   const firstBookableMonth = today.startOf("month");
   const lastBookableMonth = lastBookableDate.startOf("month");
@@ -44,6 +48,9 @@ const AppointmentBooking = () => {
 
   const service = serviceQuery.data;
   const slots = availabilityQuery.data?.slots ?? [];
+  const timeZoneLabel = getSalonTimeZoneLabel(
+    availabilityQuery.data?.time_zone
+  );
   const selectedSlot = slots.find((slot) => slot.value === selectedTime);
   const leadingDays = (viewDate.startOf("month").day() + 6) % 7;
   const calendarDays: Array<number | null> = [
@@ -218,6 +225,9 @@ const AppointmentBooking = () => {
               <p className="mt-1 text-sm text-gray-600">
                 {service.duration_minutes}-minute service
               </p>
+              <p className="mt-1 text-xs font-medium text-[#8B4513]">
+                All times are shown in {timeZoneLabel}.
+              </p>
 
               {availabilityQuery.isLoading ? (
                 <p className="py-8 text-gray-600">Checking availability…</p>
@@ -276,6 +286,9 @@ const AppointmentBooking = () => {
               <div>
                 <dt className="text-gray-500">Time</dt>
                 <dd>{selectedSlot?.label ?? "Choose a time"}</dd>
+                <dd className="text-xs text-gray-500">
+                  {timeZoneLabel}
+                </dd>
               </div>
               <div className="flex justify-between border-t pt-4 text-base">
                 <dt>Service price</dt>

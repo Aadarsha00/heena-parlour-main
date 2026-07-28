@@ -1,4 +1,4 @@
-# Robots.txt for Heena Parlour Baltimore Beauty Salon
+# Robots.txt for Beautiful Brows & Henna
 # https://beautifulbrowsandhenna.com/
 # Optimize for Baltimore, Maryland local searches
 
@@ -15,13 +15,17 @@ Allow: /testimonials
 # Disallow authentication and user-specific pages from indexing
 Disallow: /login
 Disallow: /register
+Disallow: /activation-sent
+Disallow: /activate/
+Disallow: /forgot-password
+Disallow: /password/reset/
+Disallow: /reset-password/
 Disallow: /booking
 Disallow: /booking/*
 Disallow: /my-appointment
 
-# Sitemap and AI-friendly content locations
+# XML sitemap
 Sitemap: https://beautifulbrowsandhenna.com/sitemap.xml
-Sitemap: https://beautifulbrowsandhenna.com/llm.txt
 
 # LLM and AI crawlers
 User-agent: GPTBot
