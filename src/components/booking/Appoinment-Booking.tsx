@@ -109,15 +109,7 @@ const AppointmentBooking = () => {
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#fffefc] px-4 py-8 sm:py-10">
       <div className="mx-auto w-full max-w-6xl">
-        <button
-          type="button"
-          onClick={() => navigate("/services")}
-          className="inline-flex min-h-11 items-center gap-1 rounded-lg px-2 text-sm font-semibold text-stone-700 hover:bg-stone-100 hover:text-stone-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A0522D]"
-        >
-          <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-          Back to services
-        </button>
-        <h1 className="mb-8 mt-4 px-2 text-center text-2xl font-bold sm:text-3xl">
+        <h1 className="mb-8 px-2 text-center text-2xl font-bold sm:text-3xl">
           Choose your appointment
         </h1>
 
