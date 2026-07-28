@@ -76,6 +76,37 @@ const isPublicEndpoint = (url?: string): boolean => {
   return publicEndpoints.some(endpoint => url.includes(endpoint));
 };
 
+// Only these authentication requests are allowed before a user has an access
+// token. Other /auth/ routes (for example users/me and logout) are protected.
+const unauthenticatedAuthEndpoints = new Set([
+  "/auth/jwt/create/",
+  "/auth/jwt/refresh/",
+  "/auth/jwt/verify/",
+  "/auth/users/",
+  "/auth/users/activation/",
+  "/auth/users/resend_activation/",
+  "/auth/users/reset_password/",
+  "/auth/users/reset_password_confirm/",
+]);
+
+const isUnauthenticatedAuthRequest = (
+  url?: string,
+  method?: string
+): boolean => {
+  if (!url || method?.toLowerCase() !== "post") return false;
+
+  try {
+    const pathname = new URL(url, "http://localhost").pathname.replace(
+      /^\/api(?=\/)/,
+      ""
+    );
+    const normalizedPath = pathname.endsWith("/") ? pathname : `${pathname}/`;
+    return unauthenticatedAuthEndpoints.has(normalizedPath);
+  } catch {
+    return false;
+  }
+};
+
 // Helper to handle logout
 const handleLogout = () => {
   // Clear tokens
@@ -175,10 +206,12 @@ export const ensureValidToken = async (): Promise<string | null> => {
 // REQUEST INTERCEPTOR
 api.interceptors.request.use(
   async (config: CustomAxiosRequestConfig) => {
-    // For auth endpoints, don't add authorization header
-    const isAuthEndpoint = config.url?.includes("/auth/");
+    const canRunWithoutAccessToken = isUnauthenticatedAuthRequest(
+      config.url,
+      config.method
+    );
 
-    if (!isAuthEndpoint) {
+    if (!canRunWithoutAccessToken) {
       const accessToken = localStorage.getItem("access");
       const refreshToken = localStorage.getItem("refresh");
 
@@ -208,8 +241,12 @@ api.interceptors.response.use(
     const originalRequest = error.config as CustomAxiosRequestConfig;
 
 
-    // Don't retry auth endpoints
-    const isAuthEndpoint = originalRequest?.url?.includes("/auth/");
+    // Login, registration, activation and password recovery cannot be retried
+    // with an access token. Protected account endpoints can.
+    const canRunWithoutAccessToken = isUnauthenticatedAuthRequest(
+      originalRequest?.url,
+      originalRequest?.method
+    );
     
     // Check if this is a public endpoint
     const isPublic = isPublicEndpoint(originalRequest?.url);
@@ -218,7 +255,7 @@ api.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !isAuthEndpoint
+      !canRunWithoutAccessToken
     ) {
       // If it's a public endpoint or skipAuthRedirect is true, don't logout
       if (isPublic || originalRequest.skipAuthRedirect) {

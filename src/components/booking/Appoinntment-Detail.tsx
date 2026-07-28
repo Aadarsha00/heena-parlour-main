@@ -120,7 +120,19 @@ const AppointmentDetailsForm = () => {
   }
 
   if (serviceQuery.isLoading || userQuery.isLoading || availabilityQuery.isLoading) {
-    return <p className="min-h-screen grid place-items-center">Loading details…</p>;
+    return (
+      <main className="min-h-screen grid place-items-center bg-[#fffefc]">
+        <div className="text-center" role="status" aria-live="polite">
+          <span
+            className="mx-auto block size-8 animate-spin rounded-full border-4 border-stone-200 border-t-[#A0522D]"
+            aria-hidden="true"
+          />
+          <p className="mt-3 font-medium text-stone-700">
+            Loading booking details...
+          </p>
+        </div>
+      </main>
+    );
   }
 
   if (!service || serviceQuery.isError || userQuery.isError) {
@@ -130,9 +142,28 @@ const AppointmentDetailsForm = () => {
           <p className="text-xl font-semibold text-red-700">
             Booking details could not be loaded.
           </p>
-          <button className="mt-4 underline" onClick={() => navigate(-1)}>
-            Go back
-          </button>
+          <p className="mt-2 text-sm text-stone-600">
+            Please check your connection and try again.
+          </p>
+          <div className="mt-5 flex justify-center gap-3">
+            <button
+              type="button"
+              className="rounded bg-[#A0522D] px-5 py-2 font-medium text-white"
+              onClick={() => {
+                void serviceQuery.refetch();
+                void userQuery.refetch();
+              }}
+            >
+              Try again
+            </button>
+            <button
+              type="button"
+              className="rounded border border-stone-300 px-5 py-2 font-medium"
+              onClick={() => navigate(-1)}
+            >
+              Go back
+            </button>
+          </div>
         </div>
       </main>
     );
@@ -223,7 +254,7 @@ const AppointmentDetailsForm = () => {
                   required: "Your phone number is required.",
                   pattern: {
                     value: /^\+?\d{9,15}$/,
-                    message: "Use 9–15 digits, optionally beginning with +.",
+                    message: "Use 9-15 digits, optionally beginning with +.",
                   },
                 })}
               />
@@ -250,7 +281,7 @@ const AppointmentDetailsForm = () => {
               disabled={!isValid || mutation.isPending}
               className="w-full rounded-lg bg-[#A0522D] py-3 font-semibold text-white hover:bg-[#8B4513] disabled:bg-gray-400"
             >
-              {mutation.isPending ? "Booking…" : "Confirm appointment"}
+              {mutation.isPending ? "Booking..." : "Confirm appointment"}
             </button>
           </form>
         </section>
