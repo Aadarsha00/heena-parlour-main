@@ -29,15 +29,15 @@ export default function VisitParlor(): JSX.Element {
     {
       icon: FaPhone,
       title: "Phone",
-      content: ["(410) 555-1234"],
-      href: "tel:+14105551234",
+      content: ["(443) 574-4362"],
+      href: "tel:+14435744362",
       ariaLabel: "Call us",
     },
     {
       icon: FaEnvelope,
       title: "Email",
-      content: ["info@beautifuleyebrow.com"],
-      href: "mailto:info@beautifuleyebrow.com",
+      content: ["info@beautifulbrowsandhenna.com"],
+      href: "mailto:info@beautifulbrowsandhenna.com",
       ariaLabel: "Send us an email",
     },
     {

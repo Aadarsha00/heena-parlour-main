@@ -1,5 +1,10 @@
 // Service categories based on your data
-export type ServiceCategory = "lashes" | "threading" | "party" | "hair";
+export type ServiceCategory =
+  | "lashes"
+  | "threading"
+  | "party"
+  | "henna"
+  | "combo";
 
 // Individual service interface
 export interface Service {
@@ -8,8 +13,6 @@ export interface Service {
   price: string;
   category: ServiceCategory;
   duration_minutes: number;
-  deposit_amount: string;
-  requires_deposit: boolean;
   description?: string;
 }
 

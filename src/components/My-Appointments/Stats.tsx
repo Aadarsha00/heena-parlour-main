@@ -1,59 +1,43 @@
-import React from "react";
-import { Calendar, Clock, CreditCard, CheckCircle } from "lucide-react";
+import { Calendar, CheckCircle, Clock, XCircle } from "lucide-react";
 
 export interface AppointmentStatsData {
   total: number;
   upcoming: number;
-  paymentPending: number;
   confirmed: number;
   cancelled: number;
 }
 
-interface AppointmentStatsProps {
-  stats: AppointmentStatsData;
-}
-
-const AppointmentStats: React.FC<AppointmentStatsProps> = ({ stats }) => {
-  const statCards = [
-    {
-      label: "Total Appointments",
-      value: stats.total,
-      color: "bg-blue-500",
-      icon: Calendar,
-    },
-    {
-      label: "Upcoming",
-      value: stats.upcoming,
-      color: "bg-green-500",
-      icon: Clock,
-    },
-    {
-      label: "Payment Pending",
-      value: stats.paymentPending,
-      color: "bg-yellow-500",
-      icon: CreditCard,
-    },
+const AppointmentStats = ({ stats }: { stats: AppointmentStatsData }) => {
+  const cards = [
+    { label: "Total", value: stats.total, icon: Calendar, color: "bg-blue-600" },
+    { label: "Upcoming", value: stats.upcoming, icon: Clock, color: "bg-green-600" },
     {
       label: "Confirmed",
       value: stats.confirmed,
-      color: "bg-purple-500",
       icon: CheckCircle,
+      color: "bg-purple-600",
+    },
+    {
+      label: "Cancelled",
+      value: stats.cancelled,
+      icon: XCircle,
+      color: "bg-gray-600",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-      {statCards.map((stat, index) => (
-        <div key={index} className="bg-white rounded-lg shadow p-6">
+    <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {cards.map((card) => (
+        <div key={card.label} className="rounded-lg bg-white p-4 shadow sm:p-6">
           <div className="flex items-center">
-            <div className={`${stat.color} rounded-md p-3`}>
-              <stat.icon className="h-6 w-6 text-white" />
+            <div className={`${card.color} rounded-md p-2 sm:p-3`}>
+              <card.icon className="h-5 w-5 text-white sm:h-6 sm:w-6" />
             </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-500">{stat.label}</p>
-              <p className="text-2xl font-semibold text-gray-900">
-                {stat.value}
+            <div className="ml-3">
+              <p className="text-xs font-medium text-gray-500 sm:text-sm">
+                {card.label}
               </p>
+              <p className="text-xl font-semibold sm:text-2xl">{card.value}</p>
             </div>
           </div>
         </div>

@@ -81,8 +81,8 @@ const Footer: React.FC<IFooter> = ({
               )}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 {primaryButtonText && (
-                  <a
-                    href={primaryButtonLink}
+                  <Link
+                    to={primaryButtonLink}
                     className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-black rounded-full font-medium hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:scale-105"
                   >
                     {primaryButtonText}
@@ -99,11 +99,11 @@ const Footer: React.FC<IFooter> = ({
                         d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 )}
                 {secondaryButtonText && (
-                  <a
-                    href={secondaryButtonLink}
+                  <Link
+                    to={secondaryButtonLink}
                     className="group inline-flex items-center justify-center gap-2 px-8 py-4 border border-amber-200/30 text-white rounded-full font-medium hover:bg-white/10 hover:border-amber-400/50 transition-all duration-300"
                   >
                     {secondaryButtonText}
@@ -120,7 +120,7 @@ const Footer: React.FC<IFooter> = ({
                         d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>
@@ -243,10 +243,10 @@ const Footer: React.FC<IFooter> = ({
                     />
                   </svg>
                   <a
-                    href="tel:+14105551234"
+                    href="tel:+14435744362"
                     className="text-gray-300 font-light hover:text-amber-400 transition-colors duration-300"
                   >
-                    (410) 555-1234
+                    (443) 574-4362
                   </a>
                 </div>
 
@@ -265,10 +265,10 @@ const Footer: React.FC<IFooter> = ({
                     />
                   </svg>
                   <a
-                    href="mailto:info@beautifuleyebrow.com"
+                    href="mailto:info@beautifulbrowsandhenna.com"
                     className="text-gray-300 font-light hover:text-amber-400 transition-colors duration-300"
                   >
-                    info@beautifuleyebrow.com
+                    info@beautifulbrowsandhenna.com
                   </a>
                 </div>
 
@@ -316,18 +316,18 @@ const Footer: React.FC<IFooter> = ({
                 >
                   Sitemap
                 </Link>
-                <a
-                  href="/privacy"
+                <Link
+                  to="/privacy"
                   className="text-gray-400 hover:text-amber-400 transition-colors duration-300"
                 >
                   Privacy Policy
-                </a>
-                <a
-                  href="/terms"
+                </Link>
+                <Link
+                  to="/terms"
                   className="text-gray-400 hover:text-amber-400 transition-colors duration-300"
                 >
                   Terms of Service
-                </a>
+                </Link>
               </div>
             </div>
           </div>

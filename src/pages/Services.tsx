@@ -31,7 +31,7 @@ export const Service: React.FC = () => {
         heading="Ready To Book Your Service?"
         subheading="Experience the exceptional quality and care that Beautiful Eyebrow Threading & Henna is known for. Book your appointment today."
         primaryButtonText="Book an Appointment"
-        primaryButtonLink="/booking"
+        primaryButtonLink="/services"
         secondaryButtonText="Contact Us"
         secondaryButtonLink="/contact"
       />

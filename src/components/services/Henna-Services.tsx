@@ -194,7 +194,7 @@ const LoadingSkeleton = () => (
   </div>
 );
 
-const ErrorState = ({}: { error: unknown }) => (
+const ErrorState = ({ error }: { error: unknown }) => (
   <div className="py-24 px-6 lg:px-20 bg-white">
     <div className="max-w-4xl mx-auto">
       {/* Header */}
@@ -232,6 +232,7 @@ const ErrorState = ({}: { error: unknown }) => (
           We're experiencing some technical difficulties. Please try again
           later.
         </p>
+        <span className="sr-only">{String(error)}</span>
         <button
           onClick={() => window.location.reload()}
           className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-900 to-black text-white rounded-full font-medium hover:shadow-lg transition-all duration-300"

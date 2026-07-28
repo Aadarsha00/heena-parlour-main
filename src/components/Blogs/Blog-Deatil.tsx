@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
 import parse from "html-react-parser";
+import DOMPurify from "dompurify";
 import Navbar from "../Home/Navbar";
 import Footer from "../Home/footer-home";
 import { getBlogPostBySlug, getRecentBlogPosts } from "../../api/blog.api";
@@ -173,7 +174,7 @@ const BlogDetailPage = () => {
         {
           question: "What are your salon opening hours?",
           answer:
-            "Our salon is open from 9:00 AM to 6:00 PM, Monday through Friday.",
+            "We are open Monday through Saturday from 9:00 AM to 6:00 PM, and Sunday from 10:00 AM to 4:00 PM.",
         },
         {
           question: "Do you accept walk-in clients?",
@@ -334,7 +335,7 @@ const BlogDetailPage = () => {
 
             <article className="prose max-w-none mb-12">
               {blog.content ? (
-                parse(blog.content)
+                parse(DOMPurify.sanitize(blog.content))
               ) : (
                 <div className="text-gray-600">
                   <p>Content not available for this blog post.</p>

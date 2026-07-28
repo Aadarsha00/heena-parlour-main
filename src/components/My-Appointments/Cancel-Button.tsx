@@ -1,18 +1,5 @@
-import React from "react";
-import { Trash2, XCircle } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import type { Appointment } from "../../interface/appointment.interface";
-
-// Utility function to check if appointment can be cancelled (24 hour rule)
-const canCancelAppointment = (
-  appointmentDate: string,
-  appointmentTime: string
-): boolean => {
-  const appointmentDateTime = new Date(`${appointmentDate}T${appointmentTime}`);
-  const currentTime = new Date();
-  const hoursDifference =
-    (appointmentDateTime.getTime() - currentTime.getTime()) / (1000 * 60 * 60);
-  return hoursDifference > 24;
-};
 
 interface CancelButtonProps {
   appointment: Appointment;
@@ -20,43 +7,34 @@ interface CancelButtonProps {
   isLoading: boolean;
 }
 
-const CancelButton: React.FC<CancelButtonProps> = ({
+const CancelButton = ({
   appointment,
   onCancel,
   isLoading,
-}) => {
-  const canCancel = canCancelAppointment(
-    appointment.appointment_date,
-    appointment.appointment_time
-  );
+}: CancelButtonProps) => {
+  if (
+    appointment.is_past_due ||
+    !["booked", "confirmed"].includes(appointment.status)
+  ) {
+    return null;
+  }
 
   const handleCancel = () => {
-    if (window.confirm("Are you sure you want to cancel this appointment?")) {
-      onCancel(appointment.id);
-    }
+    const warning = appointment.can_cancel
+      ? "Cancel this appointment?"
+      : "This is within 24 hours and will be recorded as a late cancellation. Continue?";
+    if (window.confirm(warning)) onCancel(appointment.id);
   };
-
-  if (!canCancel) {
-    return (
-      <button
-        disabled
-        className="inline-flex items-center px-3 py-2 border border-gray-300 text-sm leading-4 font-medium rounded-md text-gray-400 bg-gray-100 cursor-not-allowed"
-        title="Cannot cancel within 24 hours of appointment"
-      >
-        <XCircle className="h-4 w-4 mr-2" />
-        Cannot Cancel
-      </button>
-    );
-  }
 
   return (
     <button
+      type="button"
       onClick={handleCancel}
       disabled={isLoading}
-      className="inline-flex items-center px-3 py-2 border border-red-300 text-sm leading-4 font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
+      className="inline-flex items-center rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-100 disabled:opacity-50"
     >
-      <Trash2 className="h-4 w-4 mr-2" />
-      {isLoading ? "Cancelling..." : "Cancel"}
+      <Trash2 className="mr-2 h-4 w-4" />
+      {isLoading ? "Cancelling…" : "Cancel appointment"}
     </button>
   );
 };

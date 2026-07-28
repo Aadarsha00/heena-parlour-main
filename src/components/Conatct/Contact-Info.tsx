@@ -39,8 +39,8 @@ interface ContactInfoSectionProps {
 const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
   className = "",
   contactInfo = {
-    phone: "(410) 555-0123",
-    email: "contact@beautifuleyebrow.com",
+    phone: "(443) 574-4362",
+    email: "info@beautifulbrowsandhenna.com",
     address: {
       name: "Beautiful Eyebrow Threading and Henna",
       street: "2931 O'Donnell St",
@@ -49,9 +49,8 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
     },
   },
   operatingHours = {
-    "Monday - Friday": "9:00 AM - 8:00 PM",
-    Saturday: "10:00 AM - 7:00 PM",
-    Sunday: "11:00 AM - 5:00 PM",
+    "Monday - Saturday": "9:00 AM - 6:00 PM",
+    Sunday: "10:00 AM - 4:00 PM",
   },
   featuredServices = [
     { name: "Eyebrow Threading", price: "$12" },

@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/Use-Auth";
+import { logoutUser } from "../../api/auth.api";
 
 // Type definitions for better type safety
 interface NavItem {
   label: string;
   href: string;
   requiresAuth?: boolean;
-}
-
-interface NavbarProps {
-  isAuthenticated?: boolean;
 }
 
 const navItems: NavItem[] = [
@@ -22,8 +20,16 @@ const navItems: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Navbar({ isAuthenticated = false }: NavbarProps) {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { isAuthenticated, logout } = useAuth();
+  const signOut = async () => {
+    try {
+      await logoutUser();
+    } finally {
+      logout();
+    }
+  };
 
   const toggleMenu = (): void => {
     setIsMenuOpen((prev) => !prev);
@@ -73,11 +79,28 @@ export default function Navbar({ isAuthenticated = false }: NavbarProps) {
           </div>
 
           {/* Desktop CTA Button */}
-          <div className="hidden lg:flex items-center">
-            <Link to="/services">
-              <button className="bg-neutral-900 hover:bg-neutral-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">
-                Book Now
+          <div className="hidden lg:flex items-center gap-2">
+            {isAuthenticated ? (
+              <button
+                type="button"
+                onClick={signOut}
+                className="px-3 py-2 text-sm font-medium text-neutral-700 hover:text-black"
+              >
+                Sign out
               </button>
+            ) : (
+              <Link
+                to="/login"
+                className="px-3 py-2 text-sm font-medium text-neutral-700 hover:text-black"
+              >
+                Sign in
+              </Link>
+            )}
+            <Link
+              to="/services"
+              className="bg-neutral-900 hover:bg-neutral-800 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2"
+            >
+              Book Now
             </Link>
           </div>
 
@@ -129,13 +152,32 @@ export default function Navbar({ isAuthenticated = false }: NavbarProps) {
             ))}
 
             <div className="pt-4 border-t border-neutral-100">
-              <Link to="/services" className="block">
+              {isAuthenticated ? (
                 <button
-                  onClick={closeMenu}
-                  className="w-full bg-neutral-900 hover:bg-neutral-800 text-white px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2"
+                  type="button"
+                  onClick={() => {
+                    signOut();
+                    closeMenu();
+                  }}
+                  className="mb-2 w-full px-4 py-3 text-left text-sm font-medium text-neutral-700"
                 >
-                  Book Now
+                  Sign out
                 </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="mb-2 block px-4 py-3 text-sm font-medium text-neutral-700"
+                >
+                  Sign in
+                </Link>
+              )}
+              <Link
+                to="/services"
+                onClick={closeMenu}
+                className="block w-full bg-neutral-900 hover:bg-neutral-800 text-center text-white px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2"
+              >
+                Book Now
               </Link>
             </div>
           </div>

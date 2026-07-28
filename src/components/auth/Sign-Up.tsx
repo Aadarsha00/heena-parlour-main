@@ -70,28 +70,15 @@ const SignupForm = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Username */}
-          <div>
-            <label className="block text-sm font-medium text-[#5a5242] mb-1">
-              Username
-            </label>
-            <input
-              {...register("username")}
-              className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg bg-[#fffdf9] focus:ring-2 focus:ring-[#b9ad90] focus:outline-none"
-              placeholder="Your username"
-            />
-            <p className="text-red-500 text-sm mt-1">
-              {errors.username?.message}
-            </p>
-          </div>
-
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-[#5a5242] mb-1">
+            <label htmlFor="register-email" className="block text-sm font-medium text-[#5a5242] mb-1">
               Email
             </label>
             <input
+              id="register-email"
               type="email"
+              autoComplete="email"
               {...register("email")}
               className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg bg-[#fffdf9] focus:ring-2 focus:ring-[#b9ad90] focus:outline-none"
               placeholder="you@example.com"
@@ -102,34 +89,63 @@ const SignupForm = () => {
           {/* First and Last Name */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-[#5a5242] mb-1">
+              <label htmlFor="register-first-name" className="block text-sm font-medium text-[#5a5242] mb-1">
                 First Name
               </label>
               <input
+                id="register-first-name"
+                autoComplete="given-name"
                 {...register("first_name")}
                 className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg bg-[#fffdf9] focus:ring-2 focus:ring-[#b9ad90] focus:outline-none"
                 placeholder="First name"
               />
+              <p className="text-red-500 text-sm mt-1">
+                {errors.first_name?.message}
+              </p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#5a5242] mb-1">
+              <label htmlFor="register-last-name" className="block text-sm font-medium text-[#5a5242] mb-1">
                 Last Name
               </label>
               <input
+                id="register-last-name"
+                autoComplete="family-name"
                 {...register("last_name")}
                 className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg bg-[#fffdf9] focus:ring-2 focus:ring-[#b9ad90] focus:outline-none"
                 placeholder="Last name"
               />
+              <p className="text-red-500 text-sm mt-1">
+                {errors.last_name?.message}
+              </p>
             </div>
+          </div>
+
+          <div>
+            <label htmlFor="register-phone" className="block text-sm font-medium text-[#5a5242] mb-1">
+              Phone Number
+            </label>
+            <input
+              id="register-phone"
+              type="tel"
+              autoComplete="tel"
+              {...register("phone_number")}
+              className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg bg-[#fffdf9] focus:ring-2 focus:ring-[#b9ad90] focus:outline-none"
+              placeholder="+14105551234"
+            />
+            <p className="text-red-500 text-sm mt-1">
+              {errors.phone_number?.message}
+            </p>
           </div>
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-[#5a5242] mb-1">
+            <label htmlFor="register-password" className="block text-sm font-medium text-[#5a5242] mb-1">
               Password
             </label>
             <input
+              id="register-password"
               type="password"
+              autoComplete="new-password"
               {...register("password")}
               className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg bg-[#fffdf9] focus:ring-2 focus:ring-[#b9ad90] focus:outline-none"
               placeholder="••••••••"
@@ -141,11 +157,13 @@ const SignupForm = () => {
 
           {/* Confirm Password */}
           <div>
-            <label className="block text-sm font-medium text-[#5a5242] mb-1">
+            <label htmlFor="register-password-confirm" className="block text-sm font-medium text-[#5a5242] mb-1">
               Confirm Password
             </label>
             <input
+              id="register-password-confirm"
               type="password"
+              autoComplete="new-password"
               {...register("re_password")}
               className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg bg-[#fffdf9] focus:ring-2 focus:ring-[#b9ad90] focus:outline-none"
               placeholder="Repeat password"

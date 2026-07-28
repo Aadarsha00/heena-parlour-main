@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Home/Navbar";
 import ContactForm from "../components/Conatct/Contact-Form";
 import ContactMap from "../components/Conatct/Contact-Map";
@@ -11,7 +12,14 @@ const Footer: React.FC<{
   primaryButtonLink: string;
   secondaryButtonText: string;
   secondaryButtonLink: string;
-}> = ({ heading, subheading, primaryButtonText, secondaryButtonText }) => (
+}> = ({
+  heading,
+  subheading,
+  primaryButtonText,
+  primaryButtonLink,
+  secondaryButtonText,
+  secondaryButtonLink,
+}) => (
   <footer className="bg-gray-900 text-white py-20">
     <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
       <h2 className="text-3xl lg:text-4xl font-light mb-6">{heading}</h2>
@@ -19,12 +27,18 @@ const Footer: React.FC<{
         {subheading}
       </p>
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/25">
+        <Link
+          to={primaryButtonLink}
+          className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/25"
+        >
           {primaryButtonText}
-        </button>
-        <button className="border border-gray-600 text-white px-8 py-3 rounded-full font-medium hover:border-yellow-400 transition-colors">
+        </Link>
+        <Link
+          to={secondaryButtonLink}
+          className="border border-gray-600 text-white px-8 py-3 rounded-full font-medium hover:border-yellow-400 transition-colors"
+        >
           {secondaryButtonText}
-        </button>
+        </Link>
       </div>
     </div>
   </footer>
@@ -162,7 +176,7 @@ export const Contact: React.FC<ContactPageProps> = ({ className = "" }) => {
         heading="Ready To Book Your Service?"
         subheading="Experience the exceptional quality and care that Beautiful Eyebrow Threading & Henna is known for. Book your appointment today."
         primaryButtonText="Book an Appointment"
-        primaryButtonLink="/booking"
+        primaryButtonLink="/services"
         secondaryButtonText="Contact Us"
         secondaryButtonLink="/contact"
       />

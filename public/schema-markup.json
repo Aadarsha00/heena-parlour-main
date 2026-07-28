@@ -17,13 +17,13 @@
     "email": "info@beautifulbrowsandhenna.com",
     "priceRange": "$$",
     "currenciesAccepted": "USD",
-    "paymentAccepted": "Cash, Credit Card, Debit Card, Online Payment",
+    "paymentAccepted": "In-person payment",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Beauty Lane",
+      "streetAddress": "2931 O'Donnell St",
       "addressLocality": "Baltimore",
       "addressRegion": "MD",
-      "postalCode": "21201",
+      "postalCode": "21224",
       "addressCountry": "US"
     },
     "geo": {
@@ -154,7 +154,7 @@
       "@type": "ReserveAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://beautifulbrowsandhenna.com/booking",
+        "urlTemplate": "https://beautifulbrowsandhenna.com/services",
         "actionPlatform": [
           "http://schema.org/DesktopWebPlatform",
           "http://schema.org/MobileWebPlatform"
@@ -361,7 +361,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Beautiful Brows & Henna Online Booking",
-    "url": "https://beautifulbrowsandhenna.com/booking",
+    "url": "https://beautifulbrowsandhenna.com/services",
     "description": "Book your henna, threading, or lash extension appointment online at Beautiful Brows & Henna Baltimore",
     "applicationCategory": "BeautyApplication",
     "operatingSystem": "Web Browser",
@@ -373,8 +373,8 @@
     "featureList": [
       "Online Appointment Booking",
       "Service Selection",
-      "Instant Confirmation",
-      "Payment Processing",
+      "Booking Confirmation",
+      "Live Availability",
       "Appointment Management"
     ],
     "provider": {
@@ -384,7 +384,7 @@
       "@type": "UseAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://beautifulbrowsandhenna.com/booking",
+        "urlTemplate": "https://beautifulbrowsandhenna.com/services",
         "actionPlatform": [
           "http://schema.org/DesktopWebPlatform",
           "http://schema.org/IOSPlatform",
