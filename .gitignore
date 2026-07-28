@@ -23,7 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 *.md
+
+# Local environment files (the template is tracked on purpose)
 .env
+.env.*
+!.env.example
 
 .claude/
 *.zip
