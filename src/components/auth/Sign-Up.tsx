@@ -30,9 +30,14 @@ const SignupForm = () => {
     onError: (err: any) => {
       const errorData = err?.response?.data;
       let errorMessage = "Registration failed. Please try again.";
-      
+
+      if (!err?.response) {
+        errorMessage =
+          "Cannot reach the account server. Please check that the backend is running and try again.";
+      }
+
       // Try to extract detailed error from backend
-      if (typeof errorData === "object") {
+      if (errorData && typeof errorData === "object") {
         const messages: string[] = [];
         Object.entries(errorData).forEach(([key, value]: [string, any]) => {
           if (Array.isArray(value)) {
@@ -47,7 +52,7 @@ const SignupForm = () => {
       } else if (errorData?.detail) {
         errorMessage = errorData.detail;
       }
-      
+
       setBackendError(errorMessage);
       toast.error(errorMessage);
     },

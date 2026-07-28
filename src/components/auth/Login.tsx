@@ -11,6 +11,19 @@ import { useAuth } from "../../context/Use-Auth";
 import type { LoginRequest } from "../../interface/auth.interface";
 import { loginSchema } from "../../schema/auth.schema";
 
+const getLoginErrorMessage = (error: unknown): string => {
+  const message = getApiErrorMessage(
+    error,
+    "The email or password is incorrect."
+  );
+
+  if (message.toLowerCase().includes("no active account")) {
+    return "This email exists, but the password is incorrect or the account still needs activation. Try the password used when the account was first created.";
+  }
+
+  return message;
+};
+
 const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,8 +48,7 @@ const LoginForm = () => {
       toast.success("Signed in.");
       navigate(returnTo, { replace: true });
     },
-    onError: (error) =>
-      toast.error(getApiErrorMessage(error, "Email or password is incorrect.")),
+    onError: (error) => toast.error(getLoginErrorMessage(error)),
   });
 
   useEffect(() => {

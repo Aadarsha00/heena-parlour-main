@@ -1,4 +1,4 @@
-import { useState, useEffect, type JSX } from "react";
+import { useState, useEffect, useMemo, type JSX } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type {
   CategoryMap,
@@ -8,6 +8,7 @@ import {
   getAllGalleryImages,
   getGalleryImagesWithFilters,
 } from "../../api/gallery.api";
+import { useSearchParams } from "react-router-dom";
 
 interface GalleryItemsProps {
   className?: string;
@@ -237,6 +238,7 @@ const LoadingMasonry: React.FC = () => (
 export default function GalleryItems({
   className = "",
 }: GalleryItemsProps): JSX.Element {
+  const [searchParams, setSearchParams] = useSearchParams();
   const categoryMap: CategoryMap = {
     All: "All",
     brows: "Eye Brows",
@@ -279,16 +281,43 @@ export default function GalleryItems({
     retry: 2,
   });
 
-  const galleryItems: GalleryItem[] = galleryData?.results || [];
+  const galleryItems = useMemo<GalleryItem[]>(
+    () => galleryData?.results || [],
+    [galleryData?.results]
+  );
+
+  useEffect(() => {
+    const requestedImageId = Number(searchParams.get("image"));
+
+    if (!requestedImageId || selectedCategory !== "All") {
+      return;
+    }
+
+    const requestedIndex = galleryItems.findIndex(
+      (item) => item.id === requestedImageId
+    );
+
+    if (requestedIndex >= 0) {
+      setSelectedImage(galleryItems[requestedIndex]);
+      setSelectedIndex(requestedIndex);
+      setIsModalOpen(true);
+    }
+  }, [galleryItems, searchParams, selectedCategory]);
 
   const handleImageClick = (item: GalleryItem, index: number) => {
     setSelectedImage(item);
     setSelectedIndex(index);
     setIsModalOpen(true);
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set("image", String(item.id));
+    setSearchParams(nextParams, { replace: true });
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete("image");
+    setSearchParams(nextParams, { replace: true });
     setTimeout(() => {
       setSelectedImage(null);
     }, 200);
@@ -297,6 +326,12 @@ export default function GalleryItems({
   const handleModalNavigate = (index: number) => {
     setSelectedIndex(index);
     setSelectedImage(galleryItems[index]);
+    const nextImage = galleryItems[index];
+    if (nextImage) {
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.set("image", String(nextImage.id));
+      setSearchParams(nextParams, { replace: true });
+    }
   };
 
   // Error State Component

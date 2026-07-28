@@ -10,6 +10,7 @@ import { getBlogPostBySlug, getRecentBlogPosts } from "../../api/blog.api";
 import { getServicesBySpecificCategory } from "../../api/services.api";
 import type { ServiceCategory } from "../../interface/services.interface";
 import type { BlogPost } from "../../interface/blog.interface";
+import { formatUsdPrice } from "../../lib/format-price";
 
 // Helper function to construct full image URL
 const getImageUrl = (imageUrl: string | null | undefined): string => {
@@ -470,9 +471,11 @@ const BlogDetailPage = () => {
                   </div>
                 ) : (
                   relatedServices.results.slice(0, 3).map((service) => (
-                    <div
+                    <Link
                       key={service.id}
-                      className="flex space-x-3 items-center hover:bg-gray-50 p-3 rounded transition-colors cursor-pointer"
+                      to={`/booking/${service.id}`}
+                      aria-label={`Book ${service.name}`}
+                      className="flex space-x-3 items-center hover:bg-gray-50 p-3 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400"
                     >
                       <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-400 rounded flex items-center justify-center">
                         <span className="text-xs text-white font-bold">
@@ -487,11 +490,11 @@ const BlogDetailPage = () => {
                         </p>
                         {service.price && (
                           <p className="text-xs text-orange-600 font-semibold mt-1">
-                            Starting from ${service.price}
+                            Starting from {formatUsdPrice(service.price)}
                           </p>
                         )}
                       </div>
-                    </div>
+                    </Link>
                   ))
                 )}
               </div>

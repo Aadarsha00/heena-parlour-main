@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface ContactInfo {
   phone: string;
@@ -33,7 +34,6 @@ interface ContactInfoSectionProps {
   operatingHours?: OperatingHours;
   featuredServices?: ServiceItem[];
   socialLinks?: SocialLink[];
-  onNavigateToServices?: () => void;
 }
 
 const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
@@ -79,7 +79,6 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
       ),
     },
   ],
-  onNavigateToServices = () => console.log("Navigate to services"),
 }) => {
   return (
     <div
@@ -282,8 +281,8 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
         </div>
 
         <div className="flex justify-center">
-          <button
-            onClick={onNavigateToServices}
+          <Link
+            to="/services"
             className="group/button bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-8 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/25 hover:-translate-y-0.5"
           >
             <span className="flex items-center gap-2">
@@ -302,7 +301,7 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
                 />
               </svg>
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

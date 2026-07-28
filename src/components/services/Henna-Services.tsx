@@ -5,6 +5,7 @@ import type { Service } from "../../interface/services.interface";
 
 import { useAuth } from "../../context/Use-Auth";
 import type { JSX } from "react";
+import { formatUsdPrice } from "../../lib/format-price";
 
 interface ServiceCardProps {
   service: Service;
@@ -13,8 +14,11 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service, onBookNow, index }: ServiceCardProps) => (
-  <div
-    className="group bg-gradient-to-br from-white to-amber-50/30 backdrop-blur-sm border border-amber-100/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-700 hover:-translate-y-2 flex flex-col h-full"
+  <Link
+    to={`/booking/${service.id}`}
+    onClick={(e) => onBookNow(e, service.id)}
+    aria-label={`Book ${service.name}`}
+    className="group bg-gradient-to-br from-white to-amber-50/30 backdrop-blur-sm border border-amber-100/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-700 hover:-translate-y-2 flex flex-col h-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400/50"
     style={{
       animationDelay: `${index * 150}ms`,
       animation: "fadeInUp 0.8s ease-out forwards",
@@ -49,16 +53,14 @@ const ServiceCard = ({ service, onBookNow, index }: ServiceCardProps) => (
 
       <div className="ml-4 flex-shrink-0">
         <div className="bg-gradient-to-r from-gray-900 to-black text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-          ${service.price}
+          {formatUsdPrice(service.price)}
         </div>
       </div>
     </div>
 
     {/* Book Now Button */}
     <div className="mt-auto flex justify-end">
-      <Link
-        to={`/booking/${service.id}`}
-        onClick={(e) => onBookNow(e, service.id)}
+      <span
         className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-500 text-black rounded-full font-medium hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:scale-105"
       >
         Book Now
@@ -75,9 +77,9 @@ const ServiceCard = ({ service, onBookNow, index }: ServiceCardProps) => (
             d="M17 8l4 4m0 0l-4 4m4-4H3"
           />
         </svg>
-      </Link>
+      </span>
     </div>
-  </div>
+  </Link>
 );
 
 const PartyPackageCard = ({ service, onBookNow, index }: ServiceCardProps) => {
@@ -89,8 +91,11 @@ const PartyPackageCard = ({ service, onBookNow, index }: ServiceCardProps) => {
   ];
 
   return (
-    <div
-      className="group bg-gradient-to-br from-white to-amber-50/20 backdrop-blur-sm border border-amber-100/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-700 hover:-translate-y-1 max-w-4xl mx-auto"
+    <Link
+      to={`/booking/${service.id}`}
+      onClick={(e) => onBookNow(e, service.id)}
+      aria-label={`Book ${service.name}`}
+      className="group relative block bg-gradient-to-br from-white to-amber-50/20 backdrop-blur-sm border border-amber-100/50 rounded-2xl p-8 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-700 hover:-translate-y-1 max-w-4xl mx-auto focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400/50"
       style={{
         animationDelay: `${index * 200}ms`,
         animation: "fadeInUp 0.8s ease-out forwards",
@@ -130,7 +135,9 @@ const PartyPackageCard = ({ service, onBookNow, index }: ServiceCardProps) => {
         <div className="flex-shrink-0">
           <div className="bg-gradient-to-r from-gray-900 to-black text-white px-6 py-3 rounded-full shadow-lg">
             <span className="text-sm font-light">Starting from</span>
-            <div className="text-xl font-medium">${service.price}</div>
+            <div className="text-xl font-medium">
+              {formatUsdPrice(service.price)}
+            </div>
           </div>
         </div>
       </div>
@@ -150,9 +157,7 @@ const PartyPackageCard = ({ service, onBookNow, index }: ServiceCardProps) => {
 
       {/* Book Now Button */}
       <div className="flex justify-end">
-        <Link
-          to={`/booking/${service.id}`}
-          onClick={(e) => onBookNow(e, service.id)}
+        <span
           className="group/btn inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-black rounded-full font-medium hover:shadow-lg hover:shadow-amber-500/25 transition-all duration-300 hover:scale-105"
         >
           Book Package
@@ -169,9 +174,9 @@ const PartyPackageCard = ({ service, onBookNow, index }: ServiceCardProps) => {
               d="M17 8l4 4m0 0l-4 4m4-4H3"
             />
           </svg>
-        </Link>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -297,7 +302,10 @@ export default function HennaServices(): JSX.Element {
   }
 
   return (
-    <section className="py-24 px-6 lg:px-20 bg-white relative overflow-hidden">
+    <section
+      id="henna-services"
+      className="py-24 px-6 lg:px-20 bg-white relative overflow-hidden"
+    >
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0 bg-gradient-to-r from-amber-400 via-transparent to-amber-400"></div>

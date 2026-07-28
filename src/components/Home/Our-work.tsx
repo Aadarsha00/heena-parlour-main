@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, AlertCircle, Eye } from "lucide-react";
+import {
+  ArrowRight,
+  AlertCircle,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  X,
+} from "lucide-react";
 import type {
   GalleryItem as ApiGalleryItem,
   GalleryResponse as ApiGalleryResponse,
 } from "../../interface/gallery.interface";
 import { getAllGalleryImages } from "../../api/gallery.api";
+import { Link } from "react-router-dom";
 
 // Use imported types to avoid conflicts
 type LocalGalleryItem = ApiGalleryItem;
@@ -13,6 +21,9 @@ type LocalGalleryResponse = ApiGalleryResponse;
 
 export default function OurWork() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
 
   const {
     data: galleryData,
@@ -66,11 +77,46 @@ export default function OurWork() {
   ];
 
   const displayImages = images.length > 0 ? images : fallbackImages;
+  const selectedImage =
+    selectedImageIndex === null ? null : displayImages[selectedImageIndex];
 
-  const handleViewGallery = () => {
-    // Navigate to gallery page - replace with your navigation logic
-    window.location.href = "/gallery";
-  };
+  useEffect(() => {
+    if (selectedImageIndex === null) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedImageIndex(null);
+      }
+
+      if (event.key === "ArrowLeft") {
+        setSelectedImageIndex((currentIndex) =>
+          currentIndex === null
+            ? null
+            : (currentIndex - 1 + displayImages.length) % displayImages.length
+        );
+      }
+
+      if (event.key === "ArrowRight") {
+        setSelectedImageIndex((currentIndex) =>
+          currentIndex === null
+            ? null
+            : (currentIndex + 1) % displayImages.length
+        );
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [displayImages.length, selectedImageIndex]);
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
@@ -78,8 +124,9 @@ export default function OurWork() {
   };
 
   return (
-    <section className="bg-gradient-to-br from-stone-50 via-amber-50/30 to-white py-20 px-6">
-      <div className="max-w-7xl mx-auto">
+    <>
+      <section className="w-full bg-gradient-to-br from-stone-50 via-amber-50/30 to-white py-20 px-6 md:px-10 lg:px-16">
+        <div className="w-full">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-4 mb-6">
@@ -139,11 +186,14 @@ export default function OurWork() {
 
         {/* Gallery Grid */}
         {!isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {displayImages.map((img) => (
-              <div
+          <div className="flex w-full flex-wrap gap-8 mb-16">
+            {displayImages.map((img, index) => (
+              <button
+                type="button"
                 key={img.id}
-                className="group relative"
+                onClick={() => setSelectedImageIndex(index)}
+                aria-label={`Preview ${img.caption}`}
+                className="group relative min-w-0 basis-64 flex-1 rounded-3xl text-left focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400/50"
                 onMouseEnter={() => setHoveredId(img.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
@@ -218,7 +268,7 @@ export default function OurWork() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         )}
@@ -226,15 +276,15 @@ export default function OurWork() {
         {/* View Full Gallery Button */}
         {!isLoading && (
           <div className="text-center">
-            <button
-              onClick={handleViewGallery}
+            <Link
+              to="/gallery"
               className="group inline-flex items-center gap-4 bg-gradient-to-r from-stone-900 to-stone-800 hover:from-stone-800 hover:to-stone-700 text-white px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 hover:shadow-2xl hover:shadow-stone-900/25 transform hover:-translate-y-1"
             >
               <span>Explore Complete Gallery</span>
               <div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-300">
                 <ArrowRight className="w-4 h-4 text-white" />
               </div>
-            </button>
+            </Link>
 
             <p className="text-stone-500 text-sm mt-4 font-light">
               View {displayImages.length > 4 ? "50+" : "more"} examples of our
@@ -242,7 +292,80 @@ export default function OurWork() {
             </p>
           </div>
         )}
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {selectedImage && selectedImageIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-label={selectedImage.caption}
+          onClick={() => setSelectedImageIndex(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setSelectedImageIndex(null)}
+            aria-label="Close image preview"
+            className="absolute right-5 top-5 z-20 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          {displayImages.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setSelectedImageIndex(
+                    (selectedImageIndex - 1 + displayImages.length) %
+                      displayImages.length
+                  );
+                }}
+                aria-label="Previous artwork"
+                className="absolute left-3 z-20 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 md:left-6"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setSelectedImageIndex(
+                    (selectedImageIndex + 1) % displayImages.length
+                  );
+                }}
+                aria-label="Next artwork"
+                className="absolute right-3 z-20 grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 md:right-6"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            </>
+          )}
+
+          <figure
+            className="relative max-h-[90vh] max-w-6xl overflow-hidden rounded-3xl bg-stone-950 shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={selectedImage.image_url}
+              alt={selectedImage.caption}
+              className="max-h-[82vh] w-auto max-w-full object-contain"
+              onError={handleImageError}
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent px-6 pb-5 pt-16 text-white">
+              <span className="text-xs font-medium uppercase tracking-widest text-amber-300">
+                {selectedImage.category}
+              </span>
+              <p className="mt-1 text-lg font-medium">
+                {selectedImage.caption}
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      )}
+    </>
   );
 }

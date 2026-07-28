@@ -13,6 +13,7 @@ import {
 import { getCurrentUser } from "../../api/auth.api";
 import { getServiceById } from "../../api/services.api";
 import type { CreateAppointmentData } from "../../interface/appointment.interface";
+import { formatUsdPrice } from "../../lib/format-price";
 
 const AppointmentDetailsForm = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
@@ -272,7 +273,9 @@ const AppointmentDetailsForm = () => {
             </div>
             <div className="flex justify-between border-t pt-4 text-base">
               <dt>Service price</dt>
-              <dd className="font-semibold">${Number(service.price).toFixed(2)}</dd>
+              <dd className="font-semibold">
+                {formatUsdPrice(service.price)}
+              </dd>
             </div>
           </dl>
           <p className="mt-4 rounded bg-stone-50 p-3 text-xs text-gray-600">

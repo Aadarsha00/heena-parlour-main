@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllServices } from "../../api/services.api";
 import type { Service } from "../../interface/services.interface";
 import type { JSX } from "react";
+import { useNavigate } from "react-router-dom";
+import { formatUsdPrice } from "../../lib/format-price";
 
 interface PriceListProps {
   className?: string;
@@ -13,6 +15,8 @@ interface ServiceRowProps {
 }
 
 const ServiceRow: React.FC<ServiceRowProps> = ({ service, index }) => {
+  const navigate = useNavigate();
+
   const formatPrice = (price: string, serviceName: string): string => {
     const variablePricingServices = ["lash fills", "henna art", "henna party"];
     const isVariablePrice = variablePricingServices.some((keyword) =>
@@ -23,12 +27,25 @@ const ServiceRow: React.FC<ServiceRowProps> = ({ service, index }) => {
       return "Contact for pricing";
     }
 
-    return isVariablePrice ? `from $${price}` : `$${price}`;
+    const formattedPrice = formatUsdPrice(price);
+    return isVariablePrice ? `from ${formattedPrice}` : formattedPrice;
   };
+
+  const openBooking = () => navigate(`/booking/${service.id}`);
 
   return (
     <tr
-      className="group border-b border-gray-100/50 hover:bg-gradient-to-r hover:from-amber-50/30 hover:to-transparent transition-all duration-300"
+      role="link"
+      tabIndex={0}
+      aria-label={`Book ${service.name}`}
+      onClick={openBooking}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openBooking();
+        }
+      }}
+      className="group cursor-pointer border-b border-gray-100/50 hover:bg-gradient-to-r hover:from-amber-50/30 hover:to-transparent transition-all duration-300 focus-visible:outline-none focus-visible:bg-amber-50/50"
       style={{ animationDelay: `${index * 50}ms` }}
     >
       <td className="py-6 pr-8">

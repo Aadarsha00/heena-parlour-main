@@ -5,6 +5,7 @@ import dayjs, { type Dayjs } from "dayjs";
 
 import { getAvailability } from "../../api/appointment.api";
 import { getServiceById } from "../../api/services.api";
+import { formatUsdPrice } from "../../lib/format-price";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MAX_ADVANCE_DAYS = 90;
@@ -206,7 +207,9 @@ const AppointmentBooking = () => {
               </div>
               <div className="flex justify-between border-t pt-4 text-base">
                 <dt>Service price</dt>
-                <dd className="font-semibold">${Number(service.price).toFixed(2)}</dd>
+                <dd className="font-semibold">
+                  {formatUsdPrice(service.price)}
+                </dd>
               </div>
             </dl>
             <p className="mt-4 rounded bg-stone-50 p-3 text-xs text-gray-600">
