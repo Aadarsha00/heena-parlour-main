@@ -18,7 +18,6 @@ Disallow: /register
 Disallow: /booking
 Disallow: /booking/*
 Disallow: /my-appointment
-Disallow: /payment
 
 # Sitemap and AI-friendly content locations
 Sitemap: https://beautifulbrowsandhenna.com/sitemap.xml

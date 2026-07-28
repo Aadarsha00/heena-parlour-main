@@ -1,247 +1,144 @@
-import React, { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { XCircle, RefreshCw, Calendar } from "lucide-react";
+import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Calendar, RefreshCw, XCircle } from "lucide-react";
+import toast from "react-hot-toast";
+
+import {
+  cancelAppointment,
+  getApiErrorMessage,
+  getAppointments,
+} from "../../api/appointment.api";
 import type { Appointment } from "../../interface/appointment.interface";
-import { cancelAppointment, getAppointments } from "../../api/appointment.api";
-import AppointmentStats from "./Stats";
-import AppointmentFilters from "./Filter";
 import AppointmentCard from "./Card";
+import AppointmentFilters, { type FilterType } from "./Filter";
+import AppointmentStats from "./Stats";
 
-// Types for filter states
-export type FilterType =
-  | "all"
-  | "upcoming"
-  | "payment_pending"
-  | "confirmed"
-  | "cancelled";
+const isUpcoming = (appointment: Appointment) =>
+  new Date(
+    `${appointment.appointment_date}T${appointment.appointment_time}`
+  ).getTime() > Date.now() &&
+  ["booked", "confirmed"].includes(appointment.status);
 
-export interface AppointmentStats {
-  total: number;
-  upcoming: number;
-  paymentPending: number;
-  confirmed: number;
-  cancelled: number;
-}
-
-const AppointmentDashboard: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState<FilterType>("upcoming"); // Changed from "all" to "upcoming"
-  const [, setSelectedAppointment] = useState<Appointment | null>(null);
+const AppointmentDashboard = () => {
+  const [activeFilter, setActiveFilter] = useState<FilterType>("upcoming");
   const queryClient = useQueryClient();
-
-  // Fetch all appointments - single API call
-  const {
-    data: allAppointmentsResponse,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery({
+  const appointmentsQuery = useQuery({
     queryKey: ["appointments"],
     queryFn: () => getAppointments(),
-    refetchInterval: 30000, // Refetch every 30 seconds
+    staleTime: 30_000,
   });
 
-  console.log("data", allAppointmentsResponse);
-
-  // Extract appointments array from API response
-  const allAppointments = Array.isArray(allAppointmentsResponse)
-    ? allAppointmentsResponse
-    : allAppointmentsResponse?.results || [];
-
-  // Cancel appointment mutation
   const cancelMutation = useMutation({
     mutationFn: cancelAppointment,
-    onSuccess: () => {
-      // Invalidate and refetch appointment data
-      queryClient.invalidateQueries({ queryKey: ["appointments"] });
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({ queryKey: ["appointments"] });
+      toast.success(
+        data.status === "late_cancelled"
+          ? "Appointment cancelled and recorded as a late cancellation."
+          : "Appointment cancelled."
+      );
     },
-    onError: (error) => {
-      alert(`Failed to cancel appointment: ${error}`);
-    },
+    onError: (error) =>
+      toast.error(getApiErrorMessage(error, "The appointment could not be cancelled.")),
   });
 
-  // Helper function to check if appointment is upcoming
-  const isUpcoming = (appointment: Appointment): boolean => {
-    const now = new Date();
-    const appointmentDateTime = new Date(
-      `${appointment.appointment_date}T${appointment.appointment_time}`
-    );
-
-    const bufferTime = 30 * 60 * 1000; // 30 minutes in milliseconds
-
-    return (
-      appointmentDateTime.getTime() > now.getTime() - bufferTime &&
-      appointment.status !== "cancelled" &&
-      appointment.status !== "completed"
-    );
-  };
-
-  // Filter appointments based on active filter
-  const getFilteredAppointments = (): Appointment[] => {
-    switch (activeFilter) {
-      case "upcoming":
-        return allAppointments.filter((apt: Appointment) => isUpcoming(apt));
-      case "payment_pending":
-        return allAppointments.filter(
-          (apt: Appointment) => apt.payment_status === "pending"
-        );
-      case "confirmed":
-        return allAppointments.filter(
-          (apt: Appointment) => apt.status === "confirmed"
-        );
-      case "cancelled":
-        return allAppointments.filter(
-          (apt: Appointment) => apt.status === "cancelled"
-        );
-      case "all":
-      default:
-        return allAppointments;
+  const appointments = appointmentsQuery.data?.results ?? [];
+  const filteredAppointments = appointments.filter((appointment) => {
+    if (activeFilter === "all") return true;
+    if (activeFilter === "upcoming") return isUpcoming(appointment);
+    if (activeFilter === "confirmed") return appointment.status === "confirmed";
+    if (activeFilter === "cancelled") {
+      return ["cancelled", "late_cancelled"].includes(appointment.status);
     }
+    return ["completed", "no_show"].includes(appointment.status);
+  });
+
+  const stats = {
+    total: appointments.length,
+    upcoming: appointments.filter(isUpcoming).length,
+    confirmed: appointments.filter((item) => item.status === "confirmed").length,
+    cancelled: appointments.filter((item) =>
+      ["cancelled", "late_cancelled"].includes(item.status)
+    ).length,
   };
 
-  // Calculate upcoming appointments
-  const upcomingAppointments = allAppointments.filter((apt: Appointment) =>
-    isUpcoming(apt)
-  );
-
-  // Calculate payment pending appointments
-  const paymentPendingAppointments = allAppointments.filter(
-    (apt: Appointment) => apt.payment_status === "pending"
-  );
-
-  // Calculate confirmed appointments
-  const confirmedAppointments = allAppointments.filter(
-    (apt: Appointment) => apt.status === "confirmed"
-  );
-
-  // Calculate cancelled appointments
-  const cancelledAppointments = allAppointments.filter(
-    (apt: Appointment) => apt.status === "cancelled"
-  );
-
-  // Calculate stats
-  const stats: AppointmentStats = {
-    total: allAppointments.length,
-    upcoming: upcomingAppointments.length,
-    paymentPending: paymentPendingAppointments.length,
-    confirmed: confirmedAppointments.length,
-    cancelled: cancelledAppointments.length,
-  };
-
-  const filteredAppointments = getFilteredAppointments();
-
-  const handleCancelAppointment = (appointmentId: number) => {
-    cancelMutation.mutate(appointmentId);
-  };
-
-  const handleViewDetails = (appointment: Appointment) => {
-    setSelectedAppointment(appointment);
-    // TODO: Open modal or navigate to details page
-    console.log("View details for appointment:", appointment);
-  };
-
-  const handleRefresh = () => {
-    refetch();
-  };
-
-  if (error) {
+  if (appointmentsQuery.isError) {
     return (
-      <div className="min-h-screen" style={{ backgroundColor: "#F5F5DC" }}>
-        <div className="max-w-7xl mx-auto p-4">
-          <div className="bg-red-50 border border-red-200 rounded-md p-4">
-            <div className="flex">
-              <XCircle className="h-5 w-5 text-red-400" />
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-red-800">
-                  Error loading appointments
-                </h3>
-                <p className="mt-2 text-sm text-red-700">{error.toString()}</p>
-                <button
-                  onClick={handleRefresh}
-                  className="mt-3 bg-red-100 px-3 py-2 rounded-md text-sm text-red-800 hover:bg-red-200"
-                >
-                  Try Again
-                </button>
-              </div>
+      <main className="min-h-screen bg-[#F5F5DC] p-4">
+        <div className="mx-auto max-w-4xl rounded-lg border border-red-200 bg-red-50 p-5">
+          <div className="flex gap-3">
+            <XCircle className="h-5 w-5 text-red-600" />
+            <div>
+              <h1 className="font-semibold text-red-900">
+                Appointments could not be loaded
+              </h1>
+              <button
+                type="button"
+                onClick={() => appointmentsQuery.refetch()}
+                className="mt-3 underline"
+              >
+                Try again
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F5F5DC" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+    <main className="min-h-screen bg-[#F5F5DC]">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mb-8 flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              My Appointments
-            </h1>
-            <p className="text-gray-600">
-              Manage your upcoming appointments and payments
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900">My appointments</h1>
+            <p className="text-gray-600">View and manage your bookings.</p>
           </div>
           <button
-            onClick={handleRefresh}
-            className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            type="button"
+            onClick={() => appointmentsQuery.refetch()}
+            disabled={appointmentsQuery.isFetching}
+            className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium disabled:opacity-50"
           >
-            <RefreshCw className="h-4 w-4 mr-2" />
+            <RefreshCw
+              className={`mr-2 h-4 w-4 ${
+                appointmentsQuery.isFetching ? "animate-spin" : ""
+              }`}
+            />
             Refresh
           </button>
         </div>
 
-        {/* Stats */}
         <AppointmentStats stats={stats} />
-
-        {/* Filters */}
         <AppointmentFilters
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
         />
 
-        {/* Loading State */}
-        {isLoading && (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+        {appointmentsQuery.isLoading ? (
+          <p className="py-12 text-center text-gray-600">Loading appointments…</p>
+        ) : filteredAppointments.length === 0 ? (
+          <div className="rounded-lg bg-white py-12 text-center shadow">
+            <Calendar className="mx-auto h-12 w-12 text-gray-400" />
+            <h2 className="mt-3 font-medium">No appointments found</h2>
+            <p className="mt-1 text-sm text-gray-500">
+              Choose another filter or book a service.
+            </p>
           </div>
-        )}
-
-        {/* Appointments List */}
-        {!isLoading && (
-          <div className="space-y-4">
-            {filteredAppointments.length === 0 ? (
-              <div className="text-center py-12">
-                <Calendar className="mx-auto h-12 w-12 text-gray-400" />
-                <h3 className="mt-2 text-sm font-medium text-gray-900">
-                  No appointments found
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  {activeFilter === "all"
-                    ? "You don't have any appointments yet."
-                    : `No ${activeFilter.replace(
-                        "_",
-                        " "
-                      )} appointments found.`}
-                </p>
-              </div>
-            ) : (
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
-                {filteredAppointments.map((appointment) => (
-                  <AppointmentCard
-                    key={appointment.id}
-                    appointment={appointment}
-                    onCancel={handleCancelAppointment}
-                    onViewDetails={handleViewDetails}
-                    cancelLoading={cancelMutation.isPending}
-                  />
-                ))}
-              </div>
-            )}
+        ) : (
+          <div className="space-y-5">
+            {filteredAppointments.map((appointment) => (
+              <AppointmentCard
+                key={appointment.id}
+                appointment={appointment}
+                onCancel={(id) => cancelMutation.mutate(id)}
+                cancelLoading={cancelMutation.isPending}
+              />
+            ))}
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 };
 

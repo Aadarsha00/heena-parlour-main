@@ -1,50 +1,26 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../context/Use-Auth";
-import { useEffect, useState } from "react";
+import { useAuth } from "./Use-Auth";
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { isAuthenticated, isLoading, checkAuth } = useAuth();
-  const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
 
-  useEffect(() => {
-    // Explicitly check authentication when protected route is accessed
-    const performAuthCheck = async () => {
-      if (!hasCheckedAuth) {
-        console.log("🔒 Protected route accessed, checking auth...");
-        await checkAuth();
-        setHasCheckedAuth(true);
-      }
-    };
-
-    performAuthCheck();
-  }, [checkAuth, hasCheckedAuth]);
-
-  // Show loading while checking authentication status
-  if (isLoading || !hasCheckedAuth) {
+  if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+      <div className="min-h-screen grid place-items-center bg-gray-50">
+        <div
+          className="h-12 w-12 animate-spin rounded-full border-b-2 border-black"
+          aria-label="Checking sign in"
+        />
       </div>
     );
   }
 
-  // Redirect to login if not authenticated, including current location
   if (!isAuthenticated) {
     const returnTo = encodeURIComponent(location.pathname + location.search);
-    console.log(
-      "🚫 Not authenticated, redirecting to login with returnTo:",
-      location.pathname + location.search
-    );
     return <Navigate to={`/login?returnTo=${returnTo}`} replace />;
   }
-
-  // Render children if authenticated
-  return <>{children}</>;
+  return children;
 };
 
 export default ProtectedRoute;

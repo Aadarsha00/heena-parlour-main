@@ -127,7 +127,7 @@ const LoadingSkeleton = () => (
   </div>
 );
 
-const ErrorState = ({}: { error: unknown }) => (
+const ErrorState = ({ error }: { error: unknown }) => (
   <div className="text-center py-16">
     <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center">
       <svg
@@ -150,6 +150,7 @@ const ErrorState = ({}: { error: unknown }) => (
     <p className="text-gray-600 text-sm max-w-md mx-auto">
       We're experiencing some technical difficulties. Please try again later.
     </p>
+    <span className="sr-only">{String(error)}</span>
   </div>
 );
 

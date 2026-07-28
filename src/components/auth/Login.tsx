@@ -1,218 +1,126 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { loginSchema } from "../../schema/auth.schema";
-import type { LoginRequest } from "../../interface/auth.interface";
+
+import { getApiErrorMessage } from "../../api/appointment.api";
 import { loginUser } from "../../api/auth.api";
 import { useAuth } from "../../context/Use-Auth";
-import { useEffect, useState, useMemo, useCallback } from "react";
-import { startTokenRefreshTimer } from "../../components/axios/api.axios";
+import type { LoginRequest } from "../../interface/auth.interface";
+import { loginSchema } from "../../schema/auth.schema";
+
+const getLoginErrorMessage = (error: unknown): string => {
+  const message = getApiErrorMessage(
+    error,
+    "The email or password is incorrect."
+  );
+
+  if (message.toLowerCase().includes("no active account")) {
+    return "This email exists, but the password is incorrect or the account still needs activation. Try the password used when the account was first created.";
+  }
+
+  return message;
+};
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAuthenticated, setAuthenticated, isLoading, checkAuth } = useAuth();
-  const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
+  const { isAuthenticated, setAuthenticated, isLoading } = useAuth();
+  const returnTo = useMemo(() => {
+    const requested = new URLSearchParams(location.search).get("returnTo");
+    return requested?.startsWith("/") && !requested.startsWith("//")
+      ? requested
+      : "/";
+  }, [location.search]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginRequest>({
-    resolver: yupResolver(loginSchema),
-  });
+  } = useForm<LoginRequest>({ resolver: yupResolver(loginSchema) });
 
-  // OPTIMIZED: Memoize the returnTo path to prevent recreation on every render
-  const returnToPath = useMemo(() => {
-    const urlParams = new URLSearchParams(location.search);
-    const returnTo = urlParams.get("returnTo");
-    console.log("🔍 Current location.search:", location.search);
-    console.log("🔍 Parsed returnTo parameter:", returnTo);
-    console.log("🔍 Will redirect to:", returnTo || "/");
-    return returnTo || "/"; // Default to home if no returnTo
-  }, [location.search]);
-
-  const { mutate, isPending } = useMutation({
+  const mutation = useMutation({
     mutationFn: loginUser,
-    onSuccess: (data) => {
-      console.log("🎯 Login successful, storing tokens...");
-
-      // Store tokens first
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
-
-      // Update auth state
+    onSuccess: () => {
       setAuthenticated(true);
-
-      // Start token refresh timer
-      startTokenRefreshTimer();
-
-      // Show success toast
-      toast.success("Login successful!");
-
-      // Use the memoized return path
-      console.log("🔄 Redirecting to:", returnToPath);
-
-      // Navigate to the return path with a small delay to ensure state updates
-      setTimeout(() => {
-        navigate(returnToPath, { replace: true });
-      }, 100);
+      toast.success("Signed in.");
+      navigate(returnTo, { replace: true });
     },
-    onError: (error: any) => {
-      console.error("❌ Login failed:", error);
-      const errorMessage = error?.response?.data?.detail || "Login failed";
-      toast.error(errorMessage);
-    },
+    onError: (error) => toast.error(getLoginErrorMessage(error)),
   });
 
-  // OPTIMIZED: Memoize the auth check callback to prevent recreation
-  const performAuthCheck = useCallback(async () => {
-    if (!hasCheckedAuth) {
-      const refreshToken = localStorage.getItem("refresh");
-      const accessToken = localStorage.getItem("access");
-
-      // Only check auth if user has existing tokens
-      if (refreshToken || accessToken) {
-        console.log("🔍 Login page: Found existing tokens, checking auth...");
-        await checkAuth();
-      } else {
-        console.log(
-          "🆕 Login page: First time visitor, no auth check needed"
-        );
-      }
-      setHasCheckedAuth(true);
-    }
-  }, [hasCheckedAuth, checkAuth]);
-
   useEffect(() => {
-    performAuthCheck();
-  }, [performAuthCheck]);
-
-  useEffect(() => {
-    // Only redirect if auth check is complete, user is authenticated, and not currently logging in
-    if (hasCheckedAuth && !isLoading && isAuthenticated && !isPending) {
-      console.log("🔄 Already authenticated, redirecting...");
-      console.log("🔄 Redirecting already authenticated user to:", returnToPath);
-      navigate(returnToPath, { replace: true });
+    if (!isLoading && isAuthenticated && !mutation.isPending) {
+      navigate(returnTo, { replace: true });
     }
-  }, [
-    isAuthenticated,
-    isLoading,
-    navigate,
-    isPending,
-    hasCheckedAuth,
-    returnToPath, // FIXED: Use memoized value instead of location.search
-  ]);
+  }, [isAuthenticated, isLoading, mutation.isPending, navigate, returnTo]);
 
-  const onSubmit = (data: LoginRequest) => {
-    console.log("🔐 Attempting login...");
-    mutate(data);
-  };
-
-  // Show loading only if we're checking auth (and user has tokens) or during login
-  const shouldShowLoading = (isLoading && !hasCheckedAuth) || isPending;
-
-  if (shouldShowLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
-      </div>
-    );
+  if (isLoading) {
+    return <p className="min-h-screen grid place-items-center">Checking sign in…</p>;
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="max-w-md w-full space-y-8 p-6 sm:p-10 bg-white rounded-3xl shadow-2xl border border-[#e4e4d0]">
-        {/* Header */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-[#4b4032]">Welcome Back</h2>
+    <main className="min-h-screen flex items-center justify-center bg-white px-4">
+      <div className="w-full max-w-md space-y-8 rounded-3xl border border-[#e4e4d0] bg-white p-6 shadow-2xl sm:p-10">
+        <header className="text-center">
+          <h1 className="text-3xl font-bold text-[#4b4032]">Welcome back</h1>
           <p className="mt-2 text-sm text-[#6f6552]">
-            Sign in to book your beauty service
+            Sign in to book and manage appointments
           </p>
-        </div>
+        </header>
 
-        {/* Login Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Email Field */}
+        <form onSubmit={handleSubmit((data) => mutation.mutate(data))} className="space-y-6">
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-[#5a5242] mb-2"
-            >
-              Email Address
+            <label htmlFor="login-email" className="mb-2 block text-sm font-medium">
+              Email address
             </label>
             <input
-              id="email"
+              id="login-email"
               type="email"
+              autoComplete="email"
               {...register("email")}
-              className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg focus:ring-2 focus:ring-[#b9ad90] focus:border-transparent bg-[#fffdf9] placeholder:text-sm"
-              placeholder="you@example.com"
-              disabled={isPending}
+              className="w-full rounded-lg border border-[#d6d6c2] bg-[#fffdf9] px-4 py-3"
+              disabled={mutation.isPending}
             />
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
+              <p className="mt-1 text-sm text-red-700">{errors.email.message}</p>
             )}
           </div>
-
-          {/* Password Field */}
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-[#5a5242] mb-2"
-            >
+            <label htmlFor="login-password" className="mb-2 block text-sm font-medium">
               Password
             </label>
             <input
-              id="password"
+              id="login-password"
               type="password"
+              autoComplete="current-password"
               {...register("password")}
-              className="w-full px-4 py-3 border border-[#d6d6c2] rounded-lg focus:ring-2 focus:ring-[#b9ad90] focus:border-transparent bg-[#fffdf9] placeholder:text-sm"
-              placeholder="Enter your password"
-              disabled={isPending}
+              className="w-full rounded-lg border border-[#d6d6c2] bg-[#fffdf9] px-4 py-3"
+              disabled={mutation.isPending}
             />
             {errors.password && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.password.message}
-              </p>
+              <p className="mt-1 text-sm text-red-700">{errors.password.message}</p>
             )}
           </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
-            disabled={isPending}
-            className="w-full bg-black text-white py-3 px-4 rounded-lg font-semibold hover:bg-[#645746] focus:outline-none focus:ring-2 focus:ring-[#b9ad90] focus:ring-offset-2 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={mutation.isPending}
+            className="w-full rounded-lg bg-black px-4 py-3 font-semibold text-white hover:bg-[#645746] disabled:opacity-50"
           >
-            {isPending ? (
-              <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                Signing in...
-              </div>
-            ) : (
-              "Sign In"
-            )}
+            {mutation.isPending ? "Signing in…" : "Sign in"}
           </button>
         </form>
 
-        {/* Sign Up Link */}
-        <div className="text-center pt-4 border-t border-[#eceadd]">
-          <p className="text-sm text-[#6f6552]">
-            Don't have an account?{" "}
-            <Link
-              to="/register"
-              className="font-medium text-[#4b4032] hover:text-[#645746] transition"
-            >
-              Sign up here
-            </Link>
-          </p>
-        </div>
+        <p className="border-t border-[#eceadd] pt-4 text-center text-sm text-[#6f6552]">
+          Don&apos;t have an account?{" "}
+          <Link to="/register" className="font-medium text-[#4b4032] underline">
+            Create one
+          </Link>
+        </p>
       </div>
-    </div>
+    </main>
   );
 };
 

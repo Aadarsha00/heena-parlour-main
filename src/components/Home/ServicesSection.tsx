@@ -7,6 +7,7 @@ import {
 } from "../../api/services.api";
 import { Link } from "react-router-dom";
 import type { JSX } from "react";
+import { formatUsdPrice } from "../../lib/format-price";
 
 // Base service interface from API
 interface ApiService {
@@ -31,6 +32,7 @@ interface StaticService {
   description: string;
   image: string;
   apiCategory: "threading" | "party" | "lashes";
+  href: string;
 }
 
 // Combined service with pricing data
@@ -47,6 +49,7 @@ const staticServices: StaticService[] = [
       "Precision eyebrow shaping that enhances your natural beauty with clean, defined lines.",
     image: "./pictures/img2.webp",
     apiCategory: "threading",
+    href: "/services#threading-services",
   },
   {
     id: 2,
@@ -55,6 +58,7 @@ const staticServices: StaticService[] = [
       "Intricate traditional artistry that transforms your hands into stunning masterpieces.",
     image: "./pictures/image1.webp",
     apiCategory: "party",
+    href: "/services#henna-services",
   },
   {
     id: 3,
@@ -63,6 +67,7 @@ const staticServices: StaticService[] = [
       "Luxurious volume and length that creates captivating, long-lasting allure.",
     image: "./pictures/img4.webp",
     apiCategory: "lashes",
+    href: "/services#lash-services",
   },
 ];
 
@@ -86,12 +91,6 @@ const normalizeApiResponse = (data: ApiResponse | undefined): ApiService[] => {
   }
 
   return [];
-};
-
-// Helper function to format price
-const formatPrice = (price: string | number): string => {
-  const priceStr = String(price);
-  return priceStr.startsWith("$") ? priceStr : `$${priceStr}`;
 };
 
 const ServicesSection = (): JSX.Element => {
@@ -150,7 +149,7 @@ const ServicesSection = (): JSX.Element => {
       .map(
         (service): DisplayService => ({
           name: service.name,
-          price: formatPrice(service.price),
+          price: formatUsdPrice(service.price),
         })
       );
   };
@@ -195,9 +194,11 @@ const ServicesSection = (): JSX.Element => {
         {/* Services Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
           {servicesWithPrices.map((service, index) => (
-            <div
+            <Link
               key={service.id}
-              className="group relative"
+              to={service.href}
+              aria-label={`View ${service.title} services`}
+              className="group relative block h-full rounded-3xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400/50"
               style={{
                 animationDelay: `${index * 150}ms`,
               }}
@@ -208,7 +209,7 @@ const ServicesSection = (): JSX.Element => {
                 image={service.image}
                 prices={service.prices}
               />
-            </div>
+            </Link>
           ))}
         </div>
 

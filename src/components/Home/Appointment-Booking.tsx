@@ -26,9 +26,8 @@ const AppointmentPage = () => {
           <div className="space-y-12">
             <div className="space-y-6">
               <p className="text-lg text-stone-600 leading-relaxed font-light">
-                Reserve your moment of luxury. A refined experience awaits,
-                secured with a modest deposit to ensure your exclusive
-                appointment.
+                Reserve your moment of luxury. Choose a service and an
+                available time, then confirm your details online.
               </p>
             </div>
 
@@ -43,9 +42,9 @@ const AppointmentPage = () => {
                     Cancellation Policy
                   </h2>
                   <p className="text-stone-600 leading-relaxed">
-                    Reschedule or cancel up to 24 hours prior. Late changes
-                    incur a 10% service adjustment to maintain our premium
-                    standards.
+                    Cancel before your appointment whenever plans change.
+                    Cancellations made within 24 hours are recorded as late
+                    cancellations.
                   </p>
                 </div>
               </div>
@@ -106,7 +105,7 @@ const AppointmentPage = () => {
               </button>
 
               <p className="text-sm text-stone-500 mt-4">
-                Instant confirmation • Premium experience
+                Live availability · No online payment
               </p>
             </div>
           </div>

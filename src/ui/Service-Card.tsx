@@ -8,6 +8,7 @@ type ServiceCardProps = {
   description: string;
   image: string;
   prices: PriceItem[];
+  className?: string;
 };
 
 const ServiceCard = ({
@@ -15,8 +16,11 @@ const ServiceCard = ({
   description,
   image,
   prices,
+  className = "",
 }: ServiceCardProps) => (
-  <div className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-500 hover:-translate-y-2 border border-gray-100/50">
+  <div
+    className={`group relative h-full bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-500 hover:-translate-y-2 border border-gray-100/50 ${className}`}
+  >
     {/* Golden accent border */}
     <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-transparent to-amber-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
 
@@ -71,7 +75,7 @@ const ServiceCard = ({
                   {item.name}
                 </span>
                 <span className="text-sm font-medium text-black bg-gradient-to-r from-amber-50 to-amber-100/50 px-3 py-1 rounded-full border border-amber-200/30">
-                  ${item.price}
+                  {item.price}
                 </span>
               </li>
             ))}

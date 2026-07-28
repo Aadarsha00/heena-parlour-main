@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface ContactInfo {
   phone: string;
@@ -33,14 +34,13 @@ interface ContactInfoSectionProps {
   operatingHours?: OperatingHours;
   featuredServices?: ServiceItem[];
   socialLinks?: SocialLink[];
-  onNavigateToServices?: () => void;
 }
 
 const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
   className = "",
   contactInfo = {
-    phone: "(410) 555-0123",
-    email: "contact@beautifuleyebrow.com",
+    phone: "(443) 574-4362",
+    email: "info@beautifulbrowsandhenna.com",
     address: {
       name: "Beautiful Eyebrow Threading and Henna",
       street: "2931 O'Donnell St",
@@ -49,9 +49,8 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
     },
   },
   operatingHours = {
-    "Monday - Friday": "9:00 AM - 8:00 PM",
-    Saturday: "10:00 AM - 7:00 PM",
-    Sunday: "11:00 AM - 5:00 PM",
+    "Monday - Saturday": "9:00 AM - 6:00 PM",
+    Sunday: "10:00 AM - 4:00 PM",
   },
   featuredServices = [
     { name: "Eyebrow Threading", price: "$12" },
@@ -80,7 +79,6 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
       ),
     },
   ],
-  onNavigateToServices = () => console.log("Navigate to services"),
 }) => {
   return (
     <div
@@ -283,8 +281,8 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
         </div>
 
         <div className="flex justify-center">
-          <button
-            onClick={onNavigateToServices}
+          <Link
+            to="/services"
             className="group/button bg-gradient-to-r from-yellow-400 to-amber-500 text-black px-8 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/25 hover:-translate-y-0.5"
           >
             <span className="flex items-center gap-2">
@@ -303,7 +301,7 @@ const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({
                 />
               </svg>
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

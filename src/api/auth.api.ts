@@ -28,3 +28,20 @@ export const registerUser = async (
   const response = await api.post("/auth/users/", data);  
   return response.data;
 };
+
+export interface CurrentUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  email: string;
+}
+
+export const getCurrentUser = async (): Promise<CurrentUser> => {
+  const response = await api.get("/auth/users/me/");
+  return response.data;
+};
+
+export const logoutUser = async (): Promise<void> => {
+  await api.post("/auth/logout/");
+};

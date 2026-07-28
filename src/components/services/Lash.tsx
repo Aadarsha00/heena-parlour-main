@@ -4,6 +4,7 @@ import { getLashServices } from "../../api/services.api";
 import type { Service } from "../../interface/services.interface";
 import LoadingScreen from "../../ui/Loading";
 import type { JSX } from "react";
+import { formatUsdPrice } from "../../lib/format-price";
 
 interface LashServicesProps {
   className?: string;
@@ -15,8 +16,10 @@ interface ServiceCardProps {
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => (
-  <div
-    className="group relative bg-white/80 backdrop-blur-sm border border-black/5 rounded-3xl p-10 hover:bg-white transition-all duration-700 hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-1"
+  <Link
+    to={`/booking/${service.id}`}
+    aria-label={`Book ${service.name}`}
+    className="group relative block bg-white/80 backdrop-blur-sm border border-black/5 rounded-3xl p-10 hover:bg-white transition-all duration-700 hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400/50"
     style={{ animationDelay: `${index * 100}ms` }}
   >
     {/* Luxury corner accent */}
@@ -31,7 +34,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => (
             {service.name}
           </h3>
           <div className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 text-black text-sm font-medium px-5 py-2 rounded-full shadow-lg shadow-yellow-500/20">
-            ${service.price}
+            {formatUsdPrice(service.price)}
           </div>
         </div>
 
@@ -52,16 +55,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index }) => (
           </span>
         </div>
 
-        <Link
-          to={`/booking/${service.id}`}
+        <span
           className="group/btn relative bg-black text-white text-sm font-medium px-8 py-3 rounded-full overflow-hidden transition-all duration-300 hover:bg-gray-900 hover:shadow-xl hover:shadow-black/20"
         >
           <span className="relative z-10">Reserve Now</span>
           <div className="absolute inset-0 bg-gradient-to-r from-amber-400/0 via-amber-400/10 to-amber-400/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
-        </Link>
+        </span>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 const ErrorState: React.FC = () => (
@@ -122,6 +124,7 @@ export default function LashServices({
 
   return (
     <section
+      id="lash-services"
       className={`relative w-full bg-gradient-to-b from-white via-gray-50/20 to-white py-24 px-6 ${className}`}
     >
       {/* Background Pattern */}

@@ -114,12 +114,12 @@
 ### Contact Information
 - **Service:** Online appointment booking available
 - **Services Available:** Book online through website
-- **Payment Methods:** Stripe payment processing
+- **Booking Cost:** No online payment is required; customers pay at the parlour
 - **Appointment Cancellation:** Available through dashboard
 
 ### Operating Features
 - Online booking system
-- Payment processing
+- Live server-verified availability
 - Appointment management dashboard
 - Customer testimonials and reviews
 - Gallery of work samples
@@ -128,7 +128,7 @@
 ## What Makes Heena Parlour Baltimore Special
 1. **Professional Expertise:** Professional beauticians with extensive experience
 2. **Quality Service:** High-quality henna, threading, and lash extension services
-3. **Modern Technology:** Online booking and payment systems
+3. **Modern Technology:** Online booking with live availability
 4. **Customer Focus:** Dedicated customer care and appointment management
 5. **Complete Beauty Solutions:** All-in-one salon for henna, threading, and lash services
 6. **Local Establishment:** Trusted local business in Baltimore
@@ -190,7 +190,7 @@
 - Dashboard for booked appointments
 - Appointment status tracking
 - Cancellation options
-- Payment management
+- Booking management
 
 ## Frequently Asked Questions
 
@@ -205,7 +205,7 @@ A: Yes! We provide professional eyebrow threading, facial threading, and complet
 A: Absolutely. Our professional lash extension specialists offer custom lash designs and maintenance services in Baltimore, Maryland.
 
 **Q: How can I book a beauty appointment online?**
-A: Visit our Booking page, select your service, choose your appointment date and time, and complete payment through our secure system.
+A: Visit our Services page, choose a service, then select an available date and time. No online payment is required.
 
 **Q: What is the service area for Heena Parlour Baltimore?**
 A: We serve Baltimore city and surrounding Maryland areas. Our primary service area includes all Baltimore zip codes and nearby neighborhoods.

@@ -9,7 +9,6 @@ export const loginSchema = yup.object({
 
 //signup
 export const registerSchema: yup.ObjectSchema<RegisterRequest> = yup.object({
-  username: yup.string().required("Username is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
@@ -19,6 +18,10 @@ export const registerSchema: yup.ObjectSchema<RegisterRequest> = yup.object({
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")
     .required("Please confirm your password"),
-  first_name: yup.string().optional(),
-  last_name: yup.string().optional(),
+  first_name: yup.string().trim().required("First name is required"),
+  last_name: yup.string().trim().required("Last name is required"),
+  phone_number: yup
+    .string()
+    .matches(/^\+?\d{9,15}$/, "Use 9–15 digits, optionally beginning with +")
+    .required("Phone number is required"),
 });

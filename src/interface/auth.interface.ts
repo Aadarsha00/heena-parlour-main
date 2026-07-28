@@ -9,18 +9,18 @@ export interface LoginResponse {
 }
 
 export interface RegisterRequest {
-  username: string;
   email: string;
   password: string;
   re_password: string;
-  first_name?: string;
-  last_name?: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
 }
 
 export interface RegisterResponse {
   id: number;
-  username: string;
   email: string;
   first_name: string;
   last_name: string;
+  phone_number: string;
 }
