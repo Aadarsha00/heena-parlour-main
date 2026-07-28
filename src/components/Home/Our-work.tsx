@@ -14,6 +14,7 @@ import type {
 } from "../../interface/gallery.interface";
 import { getAllGalleryImages } from "../../api/gallery.api";
 import { Link } from "react-router-dom";
+import { getApiAssetUrl } from "../../config/api";
 
 // Use imported types to avoid conflicts
 type LocalGalleryItem = ApiGalleryItem;
@@ -77,6 +78,8 @@ export default function OurWork() {
   ];
 
   const displayImages = images.length > 0 ? images : fallbackImages;
+  const getDisplayImageUrl = (imageUrl: string) =>
+    images.length > 0 ? getApiAssetUrl(imageUrl) : imageUrl;
   const selectedImage =
     selectedImageIndex === null ? null : displayImages[selectedImageIndex];
 
@@ -201,7 +204,7 @@ export default function OurWork() {
                   {/* Image Container */}
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <img
-                      src={img.image_url}
+                      src={getDisplayImageUrl(img.image_url)}
                       alt={img.caption}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
@@ -350,7 +353,7 @@ export default function OurWork() {
             onClick={(event) => event.stopPropagation()}
           >
             <img
-              src={selectedImage.image_url}
+              src={getDisplayImageUrl(selectedImage.image_url)}
               alt={selectedImage.caption}
               className="max-h-[82vh] w-auto max-w-full object-contain"
               onError={handleImageError}

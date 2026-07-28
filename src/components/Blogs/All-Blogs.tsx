@@ -10,28 +10,15 @@ import {
 } from "lucide-react";
 import { getBlogCategories, getBlogPosts } from "../../api/blog.api";
 import type { BlogApiResponse } from "../../interface/blog.interface";
+import { getApiAssetUrl } from "../../config/api";
 
 const POSTS_PER_PAGE = 9;
 
 // Helper function to construct full image URL
 const getImageUrl = (imageUrl: string | null | undefined): string => {
-  if (!imageUrl) return "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=400&h=300&fit=crop";
-  
-  // If it's already a full URL (http/https)
-  if (imageUrl.startsWith("http")) {
-    // If it's from the backend and missing /media/, insert it
-    if (imageUrl.includes("api-beautiful-eyebrow.ctrlbits.xyz")) {
-      // Replace /blog/ with /media/blog/ if not already present
-      if (!imageUrl.includes("/media/")) {
-        return imageUrl.replace("ctrlbits.xyz/blog/", "ctrlbits.xyz/media/blog/");
-      }
-    }
-    return imageUrl;
-  }
-  
-  // If it's a relative path, prepend the base URL
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || "https://api-beautiful-eyebrow.ctrlbits.xyz/api/";
-  return baseUrl + imageUrl;
+  return imageUrl
+    ? getApiAssetUrl(imageUrl)
+    : "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=400&h=300&fit=crop";
 };
 
 export default function BlogGrid() {

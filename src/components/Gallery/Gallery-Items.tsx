@@ -9,6 +9,7 @@ import {
   getGalleryImagesWithFilters,
 } from "../../api/gallery.api";
 import { useSearchParams } from "react-router-dom";
+import { getApiAssetUrl } from "../../config/api";
 
 interface GalleryItemsProps {
   className?: string;
@@ -62,9 +63,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
   if (!isOpen || !image) return null;
 
-  const imageUrl = image.image_url.startsWith("http")
-    ? image.image_url
-    : `https://api-beautiful-eyebrow.ctrlbits.xyz${image.image_url}`;
+  const imageUrl = getApiAssetUrl(image.image_url);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -158,9 +157,7 @@ const MasonryGrid: React.FC<{
   return (
     <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
       {items.map((item, index) => {
-        const imageUrl = item.image_url.startsWith("http")
-          ? item.image_url
-          : `https://api-beautiful-eyebrow.ctrlbits.xyz${item.image_url}`;
+        const imageUrl = getApiAssetUrl(item.image_url);
 
         return (
           <div

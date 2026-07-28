@@ -2,6 +2,7 @@
 // src/api/api.axios.ts
 import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
 import { getAuthContextRef } from "../../context/AuthContext";
+import { API_BASE_URL } from "../../config/api";
 
 // Extend AxiosRequestConfig to include our custom properties
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -22,7 +23,7 @@ interface RefreshResponse {
 }
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: API_BASE_URL,
   timeout: 10000,
 });
 
@@ -101,7 +102,7 @@ const handleLogout = () => {
 const performTokenRefresh = async (refreshToken: string): Promise<string> => {
   // Create separate axios instance to avoid interceptor loops
   const refreshAPI = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
+    baseURL: API_BASE_URL,
     timeout: 10000,
     headers: {
       "Content-Type": "application/json",
