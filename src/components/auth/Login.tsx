@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 import { getApiErrorMessage } from "../../api/appointment.api";

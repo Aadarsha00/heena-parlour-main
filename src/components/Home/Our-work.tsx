@@ -13,7 +13,7 @@ import type {
   GalleryResponse as ApiGalleryResponse,
 } from "../../interface/gallery.interface";
 import { getAllGalleryImages } from "../../api/gallery.api";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { getApiAssetUrl } from "../../config/api";
 
 // Use imported types to avoid conflicts

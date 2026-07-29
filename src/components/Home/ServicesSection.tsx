@@ -5,7 +5,7 @@ import {
   getPartyServices,
   getThreadingServices,
 } from "../../api/services.api";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import type { JSX } from "react";
 import { formatUsdPrice } from "../../lib/format-price";
 

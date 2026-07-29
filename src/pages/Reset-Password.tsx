@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { CircleAlert, CircleCheck, KeyRound, LoaderCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 
 import { confirmPasswordReset } from "../api/auth.api";
 import type { PasswordResetConfirmForm } from "../interface/auth.interface";

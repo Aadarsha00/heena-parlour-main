@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Navbar from "../components/Home/Navbar";
 import ContactForm from "../components/Conatct/Contact-Form";
 import ContactMap from "../components/Conatct/Contact-Map";

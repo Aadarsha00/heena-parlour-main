@@ -1,6 +1,6 @@
 // src/components/SEO/Breadcrumbs.tsx
 // SEO-Friendly Breadcrumbs Component with Schema.org markup
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ChevronRight, Home } from 'lucide-react';
 import { useEffect } from 'react';
 

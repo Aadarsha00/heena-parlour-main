@@ -9,7 +9,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import {
   cancelAppointment,

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import dayjs, { type Dayjs } from "dayjs";
 import {

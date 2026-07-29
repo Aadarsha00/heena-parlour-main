@@ -1,6 +1,6 @@
 import { Eye, Palette, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 // Type definitions
 interface HeroImage {

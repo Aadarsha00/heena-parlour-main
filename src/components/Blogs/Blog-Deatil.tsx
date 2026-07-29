@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router";
 import { FiSearch } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
 import parse from "html-react-parser";

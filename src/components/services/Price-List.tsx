@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllServices } from "../../api/services.api";
 import type { Service } from "../../interface/services.interface";
 import type { JSX } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { formatUsdPrice } from "../../lib/format-price";
 
 interface PriceListProps {

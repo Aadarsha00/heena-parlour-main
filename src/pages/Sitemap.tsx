@@ -1,6 +1,6 @@
 // src/pages/Sitemap.tsx
 // HTML Sitemap Page for Better SEO and User Navigation
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import Navbar from '../components/Home/Navbar';
 import Footer from '../components/Home/footer-home';
 import { 

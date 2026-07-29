@@ -7,7 +7,7 @@ import {
   StickyNote,
   UserRound,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import type { Appointment } from "../../interface/appointment.interface";
 import CancelButton from "./Cancel-Button";

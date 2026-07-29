@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router";
 
 import { activateAccount } from "../api/auth.api";
 

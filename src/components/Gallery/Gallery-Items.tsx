@@ -8,7 +8,7 @@ import {
   getAllGalleryImages,
   getGalleryImagesWithFilters,
 } from "../../api/gallery.api";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { getApiAssetUrl } from "../../config/api";
 
 interface GalleryItemsProps {

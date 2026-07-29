@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Mail } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import toast from "react-hot-toast";
 
 import { resendActivation } from "../api/auth.api";

@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Mail, Send } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { requestPasswordReset } from "../api/auth.api";
 import type { PasswordResetRequest } from "../interface/auth.interface";
